@@ -1,0 +1,85 @@
+@startuml
+!define ENTITY class
+
+ENTITY User {
+  + UserID : INT <<PK>> <<NN>> AUTO_INCREMENT
+  + Username : VARCHAR(50) <<NN>>
+  + PasswordHash : VARCHAR(255) <<NN>>
+  + Email : VARCHAR(100) <<NN>>
+  + RegistrationDate : TIMESTAMP <<NN>>
+}
+
+ENTITY Address {
+  + AddressID : INT <<PK>> <<NN>> AUTO_INCREMENT
+  + Street : VARCHAR(100)
+  + City : VARCHAR(50)
+  + State : VARCHAR(50)
+  + PostalCode : VARCHAR(20)
+  + Country : VARCHAR(50)
+}
+
+ENTITY CategoryRestaurant {
+  + CategoryRestaurantID : INT <<PK>> <<NN>> AUTO_INCREMENT
+  + Name : VARCHAR(50) <<NN>>
+}
+
+ENTITY CategoryHome {
+  + CategoryHomeID : INT <<PK>> <<NN>> AUTO_INCREMENT
+  + Name : VARCHAR(50) <<NN>>
+}
+
+ENTITY CategoryHome_SubCategory {
+  + SubCategoryID : INT <<PK>> <<NN>> AUTO_INCREMENT
+  + Name : VARCHAR(50) <<NN>>
+}
+
+ENTITY CategoryRestaurant_SubCategory {
+  + SubCategoryID : INT <<PK>> <<NN>> AUTO_INCREMENT
+  + Name : VARCHAR(50) <<NN>>
+}
+
+ENTITY RestaurantProduct {
+  + RestaurantProductID : INT <<PK>> <<NN>> AUTO_INCREMENT
+  + Description : VARCHAR(200)
+  + Price : DECIMAL(10, 2) <<NN>>
+  + Currency : VARCHAR(10) <<NN>>
+  + Vegetarian : BOOLEAN <<NN>>
+  + Spicy : BOOLEAN <<NN>>
+  + Rating : DECIMAL(3, 2)
+  + ImageURL : VARCHAR(200)
+  + SubCategoryID : INT <<NN>>
+  + RestaurantID : INT <<NN>>
+}
+
+ENTITY HomeProduct {
+  + HomeProductID : INT <<PK>> <<NN>> AUTO_INCREMENT
+  + Recipe : TEXT
+  + Ingredients : TEXT
+  + CookingTime : INT
+  + Rating : DECIMAL(3, 2)
+  + ImageURL : VARCHAR(200)
+  + SubCategoryID : INT <<NN>>
+}
+
+ENTITY Restaurant {
+  + RestaurantID : INT <<PK>> <<NN>> AUTO_INCREMENT
+  + Name : VARCHAR(100) <<NN>>
+  + LogoURL : VARCHAR(200)
+  + AddressID : INT <<NN>>
+}
+
+User "1" -- "1" CategoryRestaurant
+User "1" -- "1" CategoryHome
+
+CategoryRestaurant "1" -- "0..*" CategoryRestaurant_SubCategory
+CategoryHome "1" -- "0..*" CategoryHome_SubCategory
+
+CategoryRestaurant_SubCategory "1" -- "0..*" RestaurantProduct
+CategoryHome_SubCategory "1" -- "0..*" HomeProduct
+
+RestaurantProduct "1" -- "1" Restaurant
+
+User "1" -- "1" Address
+
+Restaurant "1" -- "1" Address
+@enduml
