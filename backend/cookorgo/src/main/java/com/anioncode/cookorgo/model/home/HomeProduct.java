@@ -27,7 +27,4 @@ public class HomeProduct {
 
     private String imageURL;
 
-    @ManyToOne
-    @JoinColumn(name = "subCategoryID")
-    private SubCategoryHome subCategory;
 }

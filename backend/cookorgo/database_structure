@@ -28,16 +28,6 @@ ENTITY CategoryHome {
   + Name : VARCHAR(50) <<NN>>
 }
 
-ENTITY CategoryHome_SubCategory {
-  + SubCategoryID : INT <<PK>> <<NN>> AUTO_INCREMENT
-  + Name : VARCHAR(50) <<NN>>
-}
-
-ENTITY CategoryRestaurant_SubCategory {
-  + SubCategoryID : INT <<PK>> <<NN>> AUTO_INCREMENT
-  + Name : VARCHAR(50) <<NN>>
-}
-
 ENTITY RestaurantProduct {
   + RestaurantProductID : INT <<PK>> <<NN>> AUTO_INCREMENT
   + Description : VARCHAR(200)
@@ -47,7 +37,6 @@ ENTITY RestaurantProduct {
   + Spicy : BOOLEAN <<NN>>
   + Rating : DECIMAL(3, 2)
   + ImageURL : VARCHAR(200)
-  + SubCategoryID : INT <<NN>>
   + RestaurantID : INT <<NN>>
 }
 
@@ -58,7 +47,6 @@ ENTITY HomeProduct {
   + CookingTime : INT
   + Rating : DECIMAL(3, 2)
   + ImageURL : VARCHAR(200)
-  + SubCategoryID : INT <<NN>>
 }
 
 ENTITY Restaurant {
@@ -71,11 +59,9 @@ ENTITY Restaurant {
 User "1" -- "1" CategoryRestaurant
 User "1" -- "1" CategoryHome
 
-CategoryRestaurant "1" -- "0..*" CategoryRestaurant_SubCategory
-CategoryHome "1" -- "0..*" CategoryHome_SubCategory
+CategoryRestaurant "1" -- "0..*" RestaurantProduct
+CategoryHome "1" -- "0..*" HomeProduct
 
-CategoryRestaurant_SubCategory "1" -- "0..*" RestaurantProduct
-CategoryHome_SubCategory "1" -- "0..*" HomeProduct
 
 RestaurantProduct "1" -- "1" Restaurant
 
