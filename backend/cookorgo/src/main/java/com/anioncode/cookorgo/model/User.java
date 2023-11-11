@@ -1,12 +1,13 @@
 package com.anioncode.cookorgo.model;
 
+import com.anioncode.cookorgo.model.home.CategoryHome;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -34,9 +35,16 @@ public class User {
         this.registrationDate = LocalDateTime.now();
     }
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "addressID")
+    private Address address;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<CategoryHome> categoryHomes = new HashSet<>();
+
     public void setPassword(String password) {
         //TODO Later add hash
-       // BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        // BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         this.password = password; //passwordEncoder.encode(password);
     }
 }

@@ -1,8 +1,9 @@
 package com.anioncode.cookorgo.service;
 
+import com.anioncode.cookorgo.dao.CategoryHomeRepository;
 import com.anioncode.cookorgo.dao.UserRepository;
 import com.anioncode.cookorgo.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.anioncode.cookorgo.model.home.CategoryHome;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,12 +11,16 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final CategoryHomeRepository categoryHomeRepository;
+
+    public UserService(UserRepository userRepository, CategoryHomeRepository categoryHomeRepository) {
+        this.userRepository = userRepository;
+        this.categoryHomeRepository = categoryHomeRepository;
+    }
 
     // Create a new user
     public User createUser(User user) {
-        // Automatyczne hashowanie hasła
         user.setPassword(user.getPassword());
         return userRepository.save(user);
     }
@@ -35,8 +40,10 @@ public class UserService {
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent()) {
             User existingUser = user.get();
+            existingUser.setAddress(userDetails.getAddress());
             existingUser.setUsername(userDetails.getUsername());
             existingUser.setEmail(userDetails.getEmail());
+            existingUser.setCategoryHomes(userDetails.getCategoryHomes());
             return userRepository.save(existingUser);
         }
         return null;
@@ -52,5 +59,16 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-//
+    // Metoda do dodawania nowej kategorii do użytkownika
+    public User addCategoryToUser(Long userId, CategoryHome categoryHome) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            // Zapisz kategorię do repozytorium
+            categoryHomeRepository.save(categoryHome);
+            user.getCategoryHomes().add(categoryHome);
+            return userRepository.save(user);
+        }
+        return null;
+    }
 }
