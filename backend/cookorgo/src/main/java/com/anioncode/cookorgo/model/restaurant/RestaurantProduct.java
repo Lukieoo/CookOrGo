@@ -32,10 +32,6 @@ public class RestaurantProduct {
     private String imageURL;
 
     @ManyToOne
-    @JoinColumn(name = "subCategoryID")
-    private SubCategoryRestaurant subCategory;
-
-    @ManyToOne
     @JoinColumn(name = "restaurantID")
     private Restaurant restaurant;
 }

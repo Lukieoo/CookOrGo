@@ -1,8 +1,12 @@
 package com.anioncode.cookorgo.model.home;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -14,4 +18,8 @@ public class CategoryHome {
 
     @Column(length = 50, nullable = false)
     private String name;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<HomeProduct> homeProducts = new HashSet<>();
 }
