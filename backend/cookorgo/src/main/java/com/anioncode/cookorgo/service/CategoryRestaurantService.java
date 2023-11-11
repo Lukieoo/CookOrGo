@@ -82,10 +82,7 @@ public class CategoryRestaurantService {
                         existingRestaurantProduct.setSpicy(updatedRestaurantProduct.isSpicy());
                         existingRestaurantProduct.setRating(updatedRestaurantProduct.getRating());
                         existingRestaurantProduct.setImageURL(updatedRestaurantProduct.getImageURL());
-
-                        // Dodanie aktualizacji dla pola restaurant
                         existingRestaurantProduct.setRestaurant(updatedRestaurantProduct.getRestaurant());
-
                         restaurantProductRepository.save(existingRestaurantProduct);
                     });
 

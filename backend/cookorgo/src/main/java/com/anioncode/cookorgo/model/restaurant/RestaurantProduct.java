@@ -14,6 +14,8 @@ public class RestaurantProduct {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long restaurantProductID;
 
+    private String name;
+
     private String description;
 
     @Column(precision = 10, scale = 2, nullable = false)
@@ -31,7 +33,7 @@ public class RestaurantProduct {
 
     private String imageURL;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "restaurantID")
     private Restaurant restaurant;
 }

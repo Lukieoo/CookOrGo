@@ -18,7 +18,7 @@ public class Restaurant {
 
     private String logoURL;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "addressID")
     private Address address;
 }
