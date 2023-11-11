@@ -1,6 +1,7 @@
 package com.anioncode.cookorgo.model;
 
 import com.anioncode.cookorgo.model.home.CategoryHome;
+import com.anioncode.cookorgo.model.restaurant.CategoryRestaurant;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -42,6 +43,8 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL)
     private Set<CategoryHome> categoryHomes = new HashSet<>();
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<CategoryRestaurant> categoryRestaurants = new HashSet<>();
     public void setPassword(String password) {
         //TODO Later add hash
         // BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();

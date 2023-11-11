@@ -1,6 +1,7 @@
 package com.anioncode.cookorgo.controller;
 
 import com.anioncode.cookorgo.model.home.CategoryHome;
+import com.anioncode.cookorgo.model.restaurant.CategoryRestaurant;
 import com.anioncode.cookorgo.service.UserService;
 import com.anioncode.cookorgo.model.User;
 import org.springframework.http.ResponseEntity;
@@ -56,7 +57,8 @@ public class UserController {
         userService.deleteUser(id);
     }
 
-    @PostMapping("/{userId}/categories")
+    //Category Home
+    @PostMapping("/{userId}/home")
     public ResponseEntity<User> addCategoryToUser(@PathVariable Long userId, @RequestBody CategoryHome categoryHome) {
         User updatedUser = userService.addCategoryToUser(userId, categoryHome);
         if (updatedUser == null) {
@@ -65,19 +67,12 @@ public class UserController {
         return ResponseEntity.ok(updatedUser);
     }
 
-    @GetMapping("/{userId}/categories")
+    @GetMapping("/{userId}/home")
     public ResponseEntity<List<CategoryHome>> getAllCategoriesForUser(@PathVariable Long userId) {
-        Optional<User> optionalUser = userService.getUserById(userId);
-
-        if (optionalUser.isPresent()) {
-            Set<CategoryHome> userCategories = optionalUser.get().getCategoryHomes();
-            return ResponseEntity.ok(userCategories.stream().toList());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return getListResponseEntity(userId);
     }
 
-    @GetMapping("/{userId}/categories/{categoryId}")
+    @GetMapping("/{userId}/home/{categoryId}")
     public ResponseEntity<CategoryHome> getCategoryFromUser(@PathVariable Long userId, @PathVariable Long categoryId) {
         Optional<User> optionalUser = userService.getUserById(userId);
 
@@ -91,7 +86,7 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/{userId}/categories/{categoryId}")
+    @DeleteMapping("/{userId}/home/{categoryId}")
     public ResponseEntity<User> deleteCategoryFromUser(@PathVariable Long userId, @PathVariable Long categoryId) {
         Optional<User> optionalUser = userService.getUserById(userId);
 
@@ -100,6 +95,63 @@ public class UserController {
             Set<CategoryHome> userCategories = user.getCategoryHomes();
 
             userCategories.removeIf(category -> category.getCategoryHomeID().equals(categoryId));
+            userService.updateUser(userId, user);
+
+            return ResponseEntity.ok(user);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    //Restaurant Products
+    @PostMapping("/{userId}/restaurant")
+    public ResponseEntity<User> addCategoryRestaurantToUser(@PathVariable Long userId, @RequestBody CategoryRestaurant categoryRestaurant) {
+        User updatedUser = userService.addCategoryRestaurantToUser(userId, categoryRestaurant);
+        if (updatedUser == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(updatedUser);
+    }
+
+    @GetMapping("/{userId}/restaurant")
+    public ResponseEntity<List<CategoryHome>> getAllCategoriesRestaurantForUser(@PathVariable Long userId) {
+        return getListResponseEntity(userId);
+    }
+
+    private ResponseEntity<List<CategoryHome>> getListResponseEntity(@PathVariable Long userId) {
+        Optional<User> optionalUser = userService.getUserById(userId);
+
+        if (optionalUser.isPresent()) {
+            Set<CategoryHome> userCategories = optionalUser.get().getCategoryHomes();
+            return ResponseEntity.ok(userCategories.stream().toList());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/{userId}/restaurant/{categoryId}")
+    public ResponseEntity<CategoryRestaurant> getCategoryRestaurantFromUser(@PathVariable Long userId, @PathVariable Long categoryId) {
+        Optional<User> optionalUser = userService.getUserById(userId);
+
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            Optional<CategoryRestaurant> optionalCategory = user.getCategoryRestaurants().stream().filter(category -> category.getCategoryRestaurantID().equals(categoryId)).findFirst();
+
+            return optionalCategory.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/{userId}/restaurant/{categoryId}")
+    public ResponseEntity<User> deleteCategoryRestaurantFromUser(@PathVariable Long userId, @PathVariable Long categoryId) {
+        Optional<User> optionalUser = userService.getUserById(userId);
+
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            Set<CategoryRestaurant> userCategories = user.getCategoryRestaurants();
+
+            userCategories.removeIf(category -> category.getCategoryRestaurantID().equals(categoryId));
             userService.updateUser(userId, user);
 
             return ResponseEntity.ok(user);

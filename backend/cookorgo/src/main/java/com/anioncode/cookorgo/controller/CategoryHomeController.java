@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/categoryhomes")
+@RequestMapping("/home")
 public class CategoryHomeController {
     private final CategoryHomeService categoryHomeService;
 
@@ -17,7 +17,7 @@ public class CategoryHomeController {
         this.categoryHomeService = categoryHomeService;
     }
 
-    @PostMapping("/{categoryHomeId}/homeproducts")
+    @PostMapping("/{categoryHomeId}/products")
     public ResponseEntity<CategoryHome> addHomeProductToCategoryHome(
             @PathVariable Long categoryHomeId,
             @RequestBody HomeProduct homeProduct
@@ -29,7 +29,7 @@ public class CategoryHomeController {
         return ResponseEntity.ok(null);
     }
 
-    @GetMapping("/{categoryHomeId}/homeproducts")
+    @GetMapping("/{categoryHomeId}/products")
     public ResponseEntity<Set<HomeProduct>> getAllHomeProductsForCategoryHome(
             @PathVariable Long categoryHomeId
     ) {
@@ -40,7 +40,7 @@ public class CategoryHomeController {
         return ResponseEntity.ok(homeProducts);
     }
 
-    @GetMapping("/{categoryHomeId}/homeproducts/{homeProductId}")
+    @GetMapping("/{categoryHomeId}/products/{homeProductId}")
     public ResponseEntity<HomeProduct> getHomeProductFromCategoryHome(
             @PathVariable Long categoryHomeId,
             @PathVariable Long homeProductId
@@ -52,7 +52,7 @@ public class CategoryHomeController {
         return ResponseEntity.ok(homeProduct);
     }
 
-    @DeleteMapping("/{categoryHomeId}/homeproducts/{homeProductId}")
+    @DeleteMapping("/{categoryHomeId}/products/{homeProductId}")
     public ResponseEntity<CategoryHome> deleteHomeProductFromCategoryHome(
             @PathVariable Long categoryHomeId,
             @PathVariable Long homeProductId
@@ -64,7 +64,7 @@ public class CategoryHomeController {
         return ResponseEntity.ok(updatedCategoryHome);
     }
 
-    @PutMapping("/{categoryHomeId}/homeproducts/{homeProductId}")
+    @PutMapping("/{categoryHomeId}/products/{homeProductId}")
     public ResponseEntity<CategoryHome> updateHomeProduct(
             @PathVariable Long categoryHomeId,
             @PathVariable Long homeProductId,
