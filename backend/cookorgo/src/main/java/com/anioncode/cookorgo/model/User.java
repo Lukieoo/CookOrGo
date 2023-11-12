@@ -5,6 +5,7 @@ import com.anioncode.cookorgo.model.restaurant.CategoryRestaurant;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -45,9 +46,9 @@ public class User {
 
     @OneToMany(cascade = CascadeType.ALL)
     private Set<CategoryRestaurant> categoryRestaurants = new HashSet<>();
+
     public void setPassword(String password) {
-        //TODO Later add hash
-        // BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        this.password = password; //passwordEncoder.encode(password);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        this.password = passwordEncoder.encode(password);
     }
 }
