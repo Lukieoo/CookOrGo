@@ -5,6 +5,10 @@ cookorgo-service:
   host: localhost
   port: 8080
 
+auth-service:
+  host: localhost
+  port: 8085
+
 spring:
   application:
     name: GATEWAY-SERVICE

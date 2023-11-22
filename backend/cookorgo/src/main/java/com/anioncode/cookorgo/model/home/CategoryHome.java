@@ -19,7 +19,7 @@ public class CategoryHome {
     @Column(length = 50, nullable = false)
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<HomeProduct> homeProducts = new HashSet<>();
 }
