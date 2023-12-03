@@ -3,9 +3,13 @@
 
 ENTITY User {
   + UserID : INT <<PK>> <<NN>> AUTO_INCREMENT
-  + Username : VARCHAR(50) <<NN>>
   + PasswordHash : VARCHAR(255) <<NN>>
   + Email : VARCHAR(100) <<NN>>
+  + RegistrationDate : TIMESTAMP <<NN>>
+}
+ENTITY Profile {
+  + ProfileID : INT <<PK>> <<NN>> AUTO_INCREMENT
+  + ProfileName : VARCHAR(50) <<NN>>
   + RegistrationDate : TIMESTAMP <<NN>>
 }
 
@@ -56,8 +60,8 @@ ENTITY Restaurant {
   + AddressID : INT <<NN>>
 }
 
-User "1" -- "1" CategoryRestaurant
-User "1" -- "1" CategoryHome
+Profile "1" -- "1" CategoryRestaurant
+Profile "1" -- "1" CategoryHome
 
 CategoryRestaurant "1" -- "0..*" RestaurantProduct
 CategoryHome "1" -- "0..*" HomeProduct
@@ -65,7 +69,7 @@ CategoryHome "1" -- "0..*" HomeProduct
 
 RestaurantProduct "1" -- "1" Restaurant
 
-User "1" -- "1" Address
-
+Profile "1" -- "1" Address
+User "1" -- "0..*" Profile
 Restaurant "1" -- "1" Address
 @enduml
