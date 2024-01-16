@@ -5,38 +5,178 @@ body {
     sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background: url('background.png') center/cover no-repeat;
 }
 
 code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    font-family: Nunito, source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
 .app-container {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
+    justify-content: space-between;
+    height: 100vh; /* Wysokość równa 100% widoku */
+    padding: 68px;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
     padding: 20px;
 }
 
 .logo-container {
-    flex: 1;
+    margin-right: 20px;
 }
 
 .logo {
-    max-width: 100px;
+    max-width: 300px;
 }
 
 .login-container {
-    flex: 1;
     display: flex;
-    justify-content: flex-end;
+    align-items: center;
 }
 
 .login-button {
     padding: 10px;
-    background-color: #3498db;
-    color: #fff;
+    font-size: 20px;
+    background-color: unset;
+    color: #000;
     border: none;
     cursor: pointer;
+}
+
+.main-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1; /* Zajmij dostępne miejsce na wysokość */
+    padding: 20px;
+}
+
+.image-container {
+
+}
+
+.main-image {
+    max-height: 350px;
+}
+
+.text-container {
+    text-align: left;
+    margin-left: 20px;
+}
+
+.main-text {
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 56px; /* 140% */
+    max-width: 350px;
+    text-align: left;
+    color: #FAF7F5;
+    margin-bottom: 10px;
+}
+
+.find-meal-button {
+    background-color: black;
+    color: white;
+    border: none;
+    width: 350px;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.sign-up-text {
+    font-weight: 600;
+    width: 350px;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+}
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #78C4A4;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #78C4A4;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    width: 400px;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+}
+
+.modal h2 {
+    color: white;
+    margin-bottom: 10px;
+}
+
+.modal label {
+    color: white;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.modal input {
+    width: 95%;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+.modal button {
+    background-color: black;
+    color: white;
+    border: none;
+    width: 100%;
+    font-size: 16px;
+    border-radius: 5px;
+    padding: 8px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+/* Dodane style dla przycisku zmiany widoku w modale */
+.modal p button {
+    background-color: unset;
+    color: white;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+    font-size: 16px;
+    margin-left: 5px;
+}
+
+/* Dodane style dla przycisku rejestracji w modalu */
+.modal p button:hover {
+    color: lightgray;
 }
