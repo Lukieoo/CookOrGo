@@ -29,12 +29,12 @@ public class UserAuthController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/welcome")
     public String welcome() {
         return "Welcome this endpoint is not secure";
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody UserInfo userInfo) {
         try {
@@ -50,12 +50,12 @@ public class UserAuthController {
     public String userProfile() {
         return "Welcome to User Profile";
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/admin/adminProfile")
     public String adminProfile() {
         return "Welcome to Admin Profile";
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/authenticate")
     public String authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));

@@ -1,0 +1,28 @@
+/* Dashboard.css */
+
+.dashboard-container {
+    height: 100vh;
+    padding: 28px;
+}
+
+.dashboard-header {
+    color: white;
+}
+
+.logout-button {
+    padding: 10px;
+    font-size: 20px;
+    background-color: unset;
+    color: #000;
+    border: none;
+    cursor: pointer;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh; /* Wysokość równa 100% widoku */
+    padding: 28px;
+}

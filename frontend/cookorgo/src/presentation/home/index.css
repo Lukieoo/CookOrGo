@@ -5,7 +5,7 @@ body {
     sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: url('background.png') center/cover no-repeat;
+    background: url('../../ui/background.png') center/cover repeat;
 }
 
 code {
@@ -19,7 +19,27 @@ code {
     align-items: center;
     justify-content: space-between;
     height: 100vh; /* Wysokość równa 100% widoku */
-    padding: 68px;
+    padding: 28px;
+}
+
+.error-message,
+.success-message {
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.error-message {
+    background-color: #ffcccc;
+    color: #cc0000;
+}
+
+.success-message {
+    background-color: #ccffcc;
+    color: #009900;
 }
 
 .header-container {
@@ -102,18 +122,10 @@ code {
     font-size: 20px;
     text-align: center;
     color: white;
+    cursor: pointer;
 }
-.modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    background-color: #78C4A4;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-}
+
+
 .modal {
     position: fixed;
     top: 50%;
@@ -164,6 +176,7 @@ code {
     cursor: pointer;
     margin-bottom: 10px;
 }
+
 /* Dodane style dla przycisku zmiany widoku w modale */
 .modal p button {
     background-color: unset;
@@ -179,4 +192,43 @@ code {
 /* Dodane style dla przycisku rejestracji w modalu */
 .modal p button:hover {
     color: lightgray;
+}
+@media screen and (max-width: 600px) {
+
+    .header-container {
+        flex-direction: column;
+    }
+
+    .logo-container {
+        margin-bottom: 20px;
+    }
+
+    .login-button {
+        font-size: 26px;
+        font-weight: bold;
+    }
+
+    .main-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .text-container {
+        margin-left: 0;
+    }
+
+    .main-text {
+        font-size: 24px;
+        line-height: normal;
+        padding-bottom: 40px;
+    }
+
+    .find-meal-button,
+    .sign-up-text {
+        width: 100%;
+    }
+
+    .modal {
+        width: 70%;
+    }
 }
