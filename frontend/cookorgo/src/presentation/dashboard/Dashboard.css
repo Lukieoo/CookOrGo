@@ -26,3 +26,72 @@
     height: 100vh; /* Wysokość równa 100% widoku */
     padding: 28px;
 }
+.square {
+    display: inline-block;
+    width: 350px;
+    height: 350px;
+    border-radius: 20px;
+    background-color: #439A76;
+    margin: 20px;
+    position: relative;
+    cursor: pointer;
+}
+
+.square img {
+    max-width: 250px;
+    max-height: 250px;
+    display: block;
+    margin: 20px auto;
+}
+
+.square .text {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Dostosowanie do urządzeń mobilnych */
+@media screen and (max-width: 600px) {
+    .square {
+        width: 100%;
+        margin: 20px 0;
+    }
+}
+
+/* Inne style dla Dashboard */
+.dashboard-container {
+    text-align: center;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px;
+}
+
+.logo-container {
+    margin-right: 20px;
+}
+
+.logo {
+    max-width: 300px;
+}
+
+.login-container {
+    display: flex;
+    align-items: center;
+}
+
+.login-button {
+    padding: 10px;
+    font-size: 20px;
+    background-color: unset;
+    color: #000;
+    border: none;
+    cursor: pointer;
+}
