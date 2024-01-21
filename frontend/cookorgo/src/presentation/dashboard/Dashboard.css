@@ -1,7 +1,6 @@
 /* Dashboard.css */
 
 .dashboard-container {
-    height: 100vh;
     padding: 28px;
 }
 
@@ -94,4 +93,32 @@
     color: #000;
     border: none;
     cursor: pointer;
+}
+.profile-section {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.profile-rectangle {
+    background-color: #439a76;
+    color: white;
+    padding: 10px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 10px;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.profile-rectangle:hover {
+    background-color: #367e63;
+}
+
+.profile-rectangle.selected {
+    background-color: #2d614e;
+}
+
+.profile-name {
+    font-weight: bold;
 }

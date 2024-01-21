@@ -19,7 +19,7 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/my-profiles")
     public ResponseEntity<Set<Profile>> getMyProfiles(Authentication authentication) {
         // Pobieranie nazwy użytkownika z kontekstu uwierzytelniania
@@ -30,7 +30,7 @@ public class UserController {
 
         return ResponseEntity.ok(userProfiles);
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/add-profile")
     public ResponseEntity<String> addProfile(@RequestBody Profile profile, Authentication authentication) {
         // Pobieranie nazwy użytkownika z kontekstu uwierzytelniania

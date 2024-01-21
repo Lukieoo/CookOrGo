@@ -1,0 +1,16 @@
+.home-container {
+    background: white;
+    padding: 20px;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+}
+.dashboard-link {
+    display: inline-block;
+    color: black;
+    background: white;
+    font-size: 20px;
+    margin-left: 10px;
+    text-decoration: none;
+    cursor: pointer;
+}

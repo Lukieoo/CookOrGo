@@ -1,11 +1,16 @@
+*{
+    box-sizing:border-box;
+}
 body {
     margin: 0;
+    width: 100%;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background: url('../../ui/background.png') center/cover repeat;
+
 }
 
 code {
@@ -18,8 +23,8 @@ code {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    height: 100vh; /* Wysokość równa 100% widoku */
     padding: 28px;
+
 }
 
 .error-message,
@@ -160,7 +165,7 @@ code {
 }
 
 .modal input {
-    width: 95%;
+    width: 100%;
     padding: 8px;
     margin-bottom: 10px;
 }
