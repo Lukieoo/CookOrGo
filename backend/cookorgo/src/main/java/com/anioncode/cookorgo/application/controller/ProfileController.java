@@ -9,9 +9,11 @@ import io.swagger.v3.oas.annotations.tags.Tags;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @Tag(name = "Profile")
@@ -24,30 +26,35 @@ public class ProfileController {
     }
 
     // Create a new Profile
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping
     public Profile createProfile(@RequestBody Profile profile) {
         return ProfileService.createProfile(profile);
     }
 
     // Get all Profiles
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
     public List<Profile> getAllProfiles() {
         return ProfileService.getAllProfiles();
     }
 
     // Get Profile by ID
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{id}")
     public Optional<Profile> getProfileById(@PathVariable Long id) {
         return ProfileService.getProfileById(id);
     }
 
     // Update Profile by ID
+    @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("/{id}")
     public Profile updateProfile(@PathVariable Long id, @RequestBody Profile profileDetails) {
         return ProfileService.updateProfile(id, profileDetails);
     }
 
     // Delete all Profiles
+    @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping
     public String deleteAllProfiles() {
         ProfileService.deleteAllProfiles();
@@ -55,12 +62,14 @@ public class ProfileController {
     }
 
     // Delete Profile by ID
+    @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/{id}")
     public void deleteProfile(@PathVariable Long id) {
         ProfileService.deleteProfile(id);
     }
 
     //Category Home
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/{profileId}/home")
     public ResponseEntity<Profile> addCategoryToProfile(@PathVariable Long profileId, @RequestBody CategoryHome categoryHome) {
         Profile updatedProfile = ProfileService.addCategoryToProfile(profileId, categoryHome);
@@ -70,11 +79,13 @@ public class ProfileController {
         return ResponseEntity.ok(updatedProfile);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{profileId}/home")
     public ResponseEntity<List<CategoryHome>> getAllCategoriesForProfile(@PathVariable Long profileId) {
         return getListResponseEntity(profileId);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{profileId}/home/{categoryId}")
     public ResponseEntity<CategoryHome> getCategoryFromProfile(@PathVariable Long profileId, @PathVariable Long categoryId) {
         Optional<Profile> optionalProfile = ProfileService.getProfileById(profileId);
@@ -89,6 +100,7 @@ public class ProfileController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/{profileId}/home/{categoryId}")
     public ResponseEntity<Profile> deleteCategoryFromProfile(@PathVariable Long profileId, @PathVariable Long categoryId) {
         Optional<Profile> optionalProfile = ProfileService.getProfileById(profileId);
@@ -106,6 +118,7 @@ public class ProfileController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     //Restaurant Products
     @PostMapping("/{profileId}/restaurant")
     public ResponseEntity<Profile> addCategoryRestaurantToProfile(@PathVariable Long profileId, @RequestBody CategoryRestaurant categoryRestaurant) {
@@ -116,6 +129,7 @@ public class ProfileController {
         return ResponseEntity.ok(updatedProfile);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{profileId}/restaurant")
     public ResponseEntity<List<CategoryHome>> getAllCategoriesRestaurantForProfile(@PathVariable Long profileId) {
         return getListResponseEntity(profileId);
@@ -125,13 +139,19 @@ public class ProfileController {
         Optional<Profile> optionalProfile = ProfileService.getProfileById(profileId);
 
         if (optionalProfile.isPresent()) {
-            Set<CategoryHome> ProfileCategories = optionalProfile.get().getCategoryHomes();
-            return ResponseEntity.ok(ProfileCategories.stream().toList());
+            Set<CategoryHome> profileCategories = optionalProfile.get().getCategoryHomes();
+
+            List<CategoryHome> sortedCategories = profileCategories.stream()
+                    .sorted(Comparator.comparing(CategoryHome::getCategoryHomeID))
+                    .toList();
+
+            return ResponseEntity.ok(sortedCategories);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{profileId}/restaurant/{categoryId}")
     public ResponseEntity<CategoryRestaurant> getCategoryRestaurantFromProfile(@PathVariable Long profileId, @PathVariable Long categoryId) {
         Optional<Profile> optionalProfile = ProfileService.getProfileById(profileId);
@@ -146,6 +166,7 @@ public class ProfileController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/{profileId}/restaurant/{categoryId}")
     public ResponseEntity<Profile> deleteCategoryRestaurantFromProfile(@PathVariable Long profileId, @PathVariable Long categoryId) {
         Optional<Profile> optionalProfile = ProfileService.getProfileById(profileId);

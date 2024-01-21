@@ -18,7 +18,7 @@ public class CategoryHomeController {
     public CategoryHomeController(CategoryHomeService categoryHomeService) {
         this.categoryHomeService = categoryHomeService;
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/{categoryHomeId}/products")
     public ResponseEntity<CategoryHome> addHomeProductToCategoryHome(
             @PathVariable Long categoryHomeId,
@@ -30,7 +30,7 @@ public class CategoryHomeController {
         }
         return ResponseEntity.ok(null);
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{categoryHomeId}/products")
     public ResponseEntity<Set<HomeProduct>> getAllHomeProductsForCategoryHome(
             @PathVariable Long categoryHomeId
@@ -41,7 +41,7 @@ public class CategoryHomeController {
         }
         return ResponseEntity.ok(homeProducts);
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{categoryHomeId}/products/{homeProductId}")
     public ResponseEntity<HomeProduct> getHomeProductFromCategoryHome(
             @PathVariable Long categoryHomeId,
@@ -53,7 +53,7 @@ public class CategoryHomeController {
         }
         return ResponseEntity.ok(homeProduct);
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/{categoryHomeId}/products/{homeProductId}")
     public ResponseEntity<CategoryHome> deleteHomeProductFromCategoryHome(
             @PathVariable Long categoryHomeId,
@@ -65,7 +65,7 @@ public class CategoryHomeController {
         }
         return ResponseEntity.ok(updatedCategoryHome);
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("/{categoryHomeId}/products/{homeProductId}")
     public ResponseEntity<CategoryHome> updateHomeProduct(
             @PathVariable Long categoryHomeId,

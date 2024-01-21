@@ -1,16 +1,134 @@
 .home-container {
+    display: block;
+    flex-wrap: wrap;
     background: white;
     padding: 20px;
     width: 100vw;
     height: 100vh;
     margin: 0;
 }
+
+.home-main {
+    display: flex;
+}
+@media screen and (max-width: 600px) {
+    .home-main {
+        display: block;
+    }
+}
+.header-container-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.products-section-box{
+    display: block;
+}
+.login-container-box {
+    align-items: center;
+    margin-left: auto;
+    margin-right: 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.login-button {
+    padding: 10px;
+    font-size: 20px;
+    background-color: unset;
+    color: #000;
+    border: none;
+    cursor: pointer;
+}
+
 .dashboard-link {
     display: inline-block;
     color: black;
     background: white;
     font-size: 20px;
-    margin-left: 10px;
     text-decoration: none;
     cursor: pointer;
+    margin-right: 10px; /* Odstęp od prawej strony */
+}
+
+.categories-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 10px;
+}
+
+.category {
+    width: 350px;
+    padding: 20px;
+    border: 2px solid #78C4A4;
+    border-radius: 40px;
+    margin-bottom: 10px;
+    text-align: center;
+    align-content: center;
+    cursor: pointer;
+    color: #78C4A4;
+}
+
+.category.selected {
+    background-color: #78C4A4;
+    color: white;
+}
+.products-section-box{
+    margin-top: 10px;
+}
+.products-section {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.product-container {
+    display: inline-flex;
+    flex-wrap: wrap-reverse;
+    margin: 10px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 20px;
+    elevation: 60deg;
+    box-shadow: 5px 5px 5px whitesmoke;
+}
+
+.product-image {
+    margin: 0px 10px;
+}
+
+.product-image img {
+    border-radius: 20px;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.product-details {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-name {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.add-to-cart-button {
+    background-color: #78C4A4;
+    color: white;
+    border: none;
+    border-radius: 60px;
+    padding: 7px;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    cursor: pointer;
+}
+.name-section{
+    font-size: 20px;
 }
