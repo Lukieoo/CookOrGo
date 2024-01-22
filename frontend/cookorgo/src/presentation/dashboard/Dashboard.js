@@ -20,26 +20,25 @@ function Dashboard() {
         } else {
             fetchProfiles(token)
                 .then((data) => {
-                    // Zrób coś z danymi profili (np. ustaw w stanie)
-                    console.log('Profiles:', data);
                     setProfiles(data);
-
-                    // Sprawdź, czy masz już zapisany wybrany profil w localStorage
                     const storedProfileId = localStorage.getItem('selectedProfileId');
                     const storedProfile = data.find(profile => profile.id.toString() === storedProfileId);
-
-                    // Jeśli masz zapisany profil, ustaw go jako aktualnie wybrany
                     if (storedProfile) {
                         setSelectedProfile(storedProfile);
                     } else if (data.length > 0) {
-                        // Jeśli nie masz zapisanego profilu, a są dostępne profile, ustaw pierwszy jako domyślny
                         setSelectedProfile(data[0]);
+                        localStorage.setItem('selectedProfileId', data[0]);
                     }
-                });
+                }).catch((error) => {
+                if (error.message === 'Unauthorized') {
+                    handleLogout()
+                } else {
+                    console.error('Other error:', error);
+                }
+            });
         }
     }, []);
     const handleProfileClick = (profile) => {
-        // Ustaw wybrany profil w stanie i zapisz w localStorage
         setSelectedProfile(profile);
         localStorage.setItem('selectedProfileId', profile.id.toString());
     };
@@ -78,8 +77,7 @@ function Dashboard() {
                     <div
                         key={profile.id}
                         className={`profile-rectangle ${selectedProfile && selectedProfile.id === profile.id ? 'selected' : ''}`}
-                        onClick={() => handleProfileClick(profile)}
-                    >
+                        onClick={() => handleProfileClick(profile)}>
                         <div className="profile-name">{profile.profileName}</div>
                     </div>
                 ))}

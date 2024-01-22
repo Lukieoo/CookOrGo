@@ -1,6 +1,8 @@
 package com.anioncode.cookorgo.auth.filter;
+
 import com.anioncode.cookorgo.auth.service.JwtService;
 import com.anioncode.cookorgo.auth.service.UserInfoService;
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,6 +16,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 // This class helps us to validate the generated jwt token
 @Component
@@ -30,9 +34,15 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         String authHeader = request.getHeader("Authorization");
         String token = null;
         String username = null;
+        final Logger log = Logger.getLogger(getClass().getName());
+
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            token = authHeader.substring(7);
-            username = jwtService.extractUsername(token);
+            try {
+                token = authHeader.substring(7);
+                username = jwtService.extractUsername(token);
+            } catch (ExpiredJwtException e) {
+                log.log(Level.INFO, "Token expired {}", authHeader);
+            }
         }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {

@@ -1,6 +1,7 @@
 package com.anioncode.cookorgo.auth.config;
 
 import com.anioncode.cookorgo.auth.filter.JwtAuthFilter;
+import com.anioncode.cookorgo.auth.filter.JwtExpiredExceptionHandler;
 import com.anioncode.cookorgo.auth.service.AuthEntryPointJwt;
 import com.anioncode.cookorgo.auth.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers("/auth/welcome", "/auth/register", "/auth/authenticate").permitAll()
-                                .requestMatchers("/auth/**","/**").permitAll()
+                                .requestMatchers("/auth/**", "/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())

@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,17 +21,23 @@ public class UserController {
     @Autowired
     private UserService userService;
     @CrossOrigin(origins = "http://localhost:3000")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     @GetMapping("/my-profiles")
     public ResponseEntity<Set<Profile>> getMyProfiles(Authentication authentication) {
         // Pobieranie nazwy użytkownika z kontekstu uwierzytelniania
-        String username = authentication.getName();
+        if (authentication!=null) {
+            String username = authentication.getName();
 
-        // Pobieranie profili dla konkretnego użytkownika
-        Set<Profile> userProfiles = userService.getProfilesByUsername(username);
+            // Pobieranie profili dla konkretnego użytkownika
+            Set<Profile> userProfiles = userService.getProfilesByUsername(username);
 
-        return ResponseEntity.ok(userProfiles);
+            return ResponseEntity.ok(userProfiles);
+        }else {
+            return  ResponseEntity.badRequest().build();
+        }
     }
     @CrossOrigin(origins = "http://localhost:3000")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     @PostMapping("/add-profile")
     public ResponseEntity<String> addProfile(@RequestBody Profile profile, Authentication authentication) {
         // Pobieranie nazwy użytkownika z kontekstu uwierzytelniania

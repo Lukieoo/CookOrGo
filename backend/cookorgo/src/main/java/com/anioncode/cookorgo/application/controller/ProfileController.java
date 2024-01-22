@@ -7,6 +7,7 @@ import com.anioncode.cookorgo.application.model.Profile;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Comparator;
@@ -27,6 +28,7 @@ public class ProfileController {
 
     // Create a new Profile
     @CrossOrigin(origins = "http://localhost:3000")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     @PostMapping
     public Profile createProfile(@RequestBody Profile profile) {
         return ProfileService.createProfile(profile);
@@ -34,6 +36,7 @@ public class ProfileController {
 
     // Get all Profiles
     @CrossOrigin(origins = "http://localhost:3000")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     @GetMapping
     public List<Profile> getAllProfiles() {
         return ProfileService.getAllProfiles();
@@ -41,6 +44,7 @@ public class ProfileController {
 
     // Get Profile by ID
     @CrossOrigin(origins = "http://localhost:3000")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     @GetMapping("/{id}")
     public Optional<Profile> getProfileById(@PathVariable Long id) {
         return ProfileService.getProfileById(id);
@@ -48,6 +52,7 @@ public class ProfileController {
 
     // Update Profile by ID
     @CrossOrigin(origins = "http://localhost:3000")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     @PutMapping("/{id}")
     public Profile updateProfile(@PathVariable Long id, @RequestBody Profile profileDetails) {
         return ProfileService.updateProfile(id, profileDetails);
@@ -55,6 +60,7 @@ public class ProfileController {
 
     // Delete all Profiles
     @CrossOrigin(origins = "http://localhost:3000")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     @DeleteMapping
     public String deleteAllProfiles() {
         ProfileService.deleteAllProfiles();
@@ -63,6 +69,7 @@ public class ProfileController {
 
     // Delete Profile by ID
     @CrossOrigin(origins = "http://localhost:3000")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     @DeleteMapping("/{id}")
     public void deleteProfile(@PathVariable Long id) {
         ProfileService.deleteProfile(id);
@@ -70,6 +77,7 @@ public class ProfileController {
 
     //Category Home
     @CrossOrigin(origins = "http://localhost:3000")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     @PostMapping("/{profileId}/home")
     public ResponseEntity<Profile> addCategoryToProfile(@PathVariable Long profileId, @RequestBody CategoryHome categoryHome) {
         Profile updatedProfile = ProfileService.addCategoryToProfile(profileId, categoryHome);
@@ -80,12 +88,14 @@ public class ProfileController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     @GetMapping("/{profileId}/home")
     public ResponseEntity<List<CategoryHome>> getAllCategoriesForProfile(@PathVariable Long profileId) {
         return getListResponseEntity(profileId);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     @GetMapping("/{profileId}/home/{categoryId}")
     public ResponseEntity<CategoryHome> getCategoryFromProfile(@PathVariable Long profileId, @PathVariable Long categoryId) {
         Optional<Profile> optionalProfile = ProfileService.getProfileById(profileId);
@@ -101,6 +111,7 @@ public class ProfileController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     @DeleteMapping("/{profileId}/home/{categoryId}")
     public ResponseEntity<Profile> deleteCategoryFromProfile(@PathVariable Long profileId, @PathVariable Long categoryId) {
         Optional<Profile> optionalProfile = ProfileService.getProfileById(profileId);
@@ -119,6 +130,7 @@ public class ProfileController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     //Restaurant Products
     @PostMapping("/{profileId}/restaurant")
     public ResponseEntity<Profile> addCategoryRestaurantToProfile(@PathVariable Long profileId, @RequestBody CategoryRestaurant categoryRestaurant) {
@@ -130,6 +142,7 @@ public class ProfileController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     @GetMapping("/{profileId}/restaurant")
     public ResponseEntity<List<CategoryHome>> getAllCategoriesRestaurantForProfile(@PathVariable Long profileId) {
         return getListResponseEntity(profileId);
@@ -152,6 +165,7 @@ public class ProfileController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     @GetMapping("/{profileId}/restaurant/{categoryId}")
     public ResponseEntity<CategoryRestaurant> getCategoryRestaurantFromProfile(@PathVariable Long profileId, @PathVariable Long categoryId) {
         Optional<Profile> optionalProfile = ProfileService.getProfileById(profileId);
@@ -167,6 +181,7 @@ public class ProfileController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     @DeleteMapping("/{profileId}/restaurant/{categoryId}")
     public ResponseEntity<Profile> deleteCategoryRestaurantFromProfile(@PathVariable Long profileId, @PathVariable Long categoryId) {
         Optional<Profile> optionalProfile = ProfileService.getProfileById(profileId);

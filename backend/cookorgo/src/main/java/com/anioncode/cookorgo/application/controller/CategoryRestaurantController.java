@@ -19,6 +19,7 @@ public class CategoryRestaurantController {
         this.categoryRestaurantService = categoryRestaurantService;
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/{categoryRestaurantId}/products")
     public ResponseEntity<CategoryRestaurant> addRestaurantProductToCategoryRestaurant(
             @PathVariable Long categoryRestaurantId,
@@ -31,6 +32,7 @@ public class CategoryRestaurantController {
         return ResponseEntity.ok(null);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{categoryRestaurantId}/products")
     public ResponseEntity<Set<RestaurantProduct>> getAllRestaurantProductsForCategoryRestaurant(
             @PathVariable Long categoryRestaurantId
@@ -42,6 +44,7 @@ public class CategoryRestaurantController {
         return ResponseEntity.ok(restaurantProducts);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{categoryRestaurantId}/products/{restaurantProductId}")
     public ResponseEntity<RestaurantProduct> getRestaurantProductFromCategoryRestaurant(
             @PathVariable Long categoryRestaurantId,
@@ -54,6 +57,7 @@ public class CategoryRestaurantController {
         return ResponseEntity.ok(restaurantProduct);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/{categoryRestaurantId}/products/{restaurantProductId}")
     public ResponseEntity<CategoryRestaurant> deleteRestaurantProductFromCategoryRestaurant(
             @PathVariable Long categoryRestaurantId,
@@ -66,6 +70,7 @@ public class CategoryRestaurantController {
         return ResponseEntity.ok(updatedCategoryRestaurant);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("/{categoryRestaurantId}/products/{restaurantProductId}")
     public ResponseEntity<CategoryRestaurant> updateRestaurantProduct(
             @PathVariable Long categoryRestaurantId,

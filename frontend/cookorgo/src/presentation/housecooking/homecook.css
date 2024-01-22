@@ -1,15 +1,18 @@
 .home-container {
     display: block;
     flex-wrap: wrap;
-    background: white;
-    padding: 20px;
+    background-color: white;
+
     width: 100vw;
     height: 100vh;
     margin: 0;
 }
 
 .home-main {
+    padding: 0 20px;
     display: flex;
+    background: white;
+    box-shadow: 5px 5px 5px whitesmoke;
 }
 @media screen and (max-width: 600px) {
     .home-main {
@@ -27,7 +30,8 @@
 .login-container-box {
     align-items: center;
     margin-left: auto;
-    margin-right: 0;
+    margin-right: 20px;
+    margin-top: 20px;
     display: flex;
     justify-content: flex-end;
 }
@@ -55,7 +59,6 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-top: 10px;
 }
 
 .category {
@@ -131,4 +134,41 @@
 }
 .name-section{
     font-size: 20px;
+}
+.summary-section{
+    border-radius: 20px;
+    outline:2px solid #78C4A4;
+background-color: white;
+    padding: 10px;
+    width: 350px;
+}
+.summary-products {
+    margin-top: 12px;
+}
+
+.summary-product {
+    padding: 8px;
+    margin-bottom: 8px;
+}
+.go-summary-button {
+    border-radius: 20px;
+    background-color: black;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    margin-top: 12px;
+}
+.clear-summary-button {
+    border-radius: 20px;
+    background-color: #ff3333;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    margin-top: 12px;
+}
+
+.clear-summary-button:hover {
+    background-color: #cc0000;
 }
