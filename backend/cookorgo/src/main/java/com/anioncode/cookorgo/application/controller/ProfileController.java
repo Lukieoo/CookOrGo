@@ -144,8 +144,8 @@ public class ProfileController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PreAuthorize("hasAuthority('ROLE_USER')")
     @GetMapping("/{profileId}/restaurant")
-    public ResponseEntity<List<CategoryHome>> getAllCategoriesRestaurantForProfile(@PathVariable Long profileId) {
-        return getListResponseEntity(profileId);
+    public ResponseEntity<List<CategoryRestaurant>> getAllCategoriesRestaurantForProfile(@PathVariable Long profileId) {
+        return getCategoryRestaurantsEntity(profileId);
     }
 
     private ResponseEntity<List<CategoryHome>> getListResponseEntity(@PathVariable Long profileId) {
@@ -156,6 +156,22 @@ public class ProfileController {
 
             List<CategoryHome> sortedCategories = profileCategories.stream()
                     .sorted(Comparator.comparing(CategoryHome::getCategoryHomeID))
+                    .toList();
+
+            return ResponseEntity.ok(sortedCategories);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    private ResponseEntity<List<CategoryRestaurant>> getCategoryRestaurantsEntity(@PathVariable Long profileId) {
+        Optional<Profile> optionalProfile = ProfileService.getProfileById(profileId);
+
+        if (optionalProfile.isPresent()) {
+            Set<CategoryRestaurant> profileCategories = optionalProfile.get().getCategoryRestaurants();
+
+            List<CategoryRestaurant> sortedCategories = profileCategories.stream()
+                    .sorted(Comparator.comparing(CategoryRestaurant::getCategoryRestaurantID))
                     .toList();
 
             return ResponseEntity.ok(sortedCategories);

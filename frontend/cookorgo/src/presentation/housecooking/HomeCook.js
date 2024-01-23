@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {Link} from 'react-router-dom';  // Import React Router Link
-import {faBook, faPlus} from '@fortawesome/free-solid-svg-icons';
+import {faBook, faPlus, faTrash} from '@fortawesome/free-solid-svg-icons';
 import {fetchCategories, fetchProducts} from '../../api/api';
 import placeholder from "../../ui/placeholder.jpeg";
 import './homecook.css';
@@ -16,8 +16,19 @@ function HomeCook() {
     const handleLogout = () => {
         localStorage.removeItem('jwtToken');
         localStorage.removeItem('selectedProfileId')
+        localStorage.removeItem('summaryProducts');
         window.location.href = "/";
     };
+    useEffect(() => {
+        const storedSummaryProducts = JSON.parse(localStorage.getItem('summaryProducts')) || [];
+        setSummaryProducts(storedSummaryProducts);
+    }, []);
+    useEffect(() => {
+        if (summaryProducts.length > 0) {
+            localStorage.setItem('summaryProducts', JSON.stringify(summaryProducts));
+        }
+    }, [summaryProducts]);
+
     useEffect(() => {
         const token = localStorage.getItem('jwtToken');
         if (!token) {
@@ -64,11 +75,15 @@ function HomeCook() {
         setSummaryProducts([...summaryProducts, product]);
     };
     const handleClearSummary = () => {
+        localStorage.setItem('summaryProducts', JSON.stringify([]));
         setSummaryProducts([]);
     };
     const handleCategoryClick = (categoryId, name) => {
         setSelectedCategory(categoryId);
         setSelectedName(name);
+    };
+    const handleProductClick = (productId) => {
+        window.location.href = `/products/${selectedCategory}/${productId}`;
     };
     return (
         <div className="home-container">
@@ -103,11 +118,13 @@ function HomeCook() {
                                 </div>
                             ))}
                         </div>
-                        <button className="go-summary-button">
-                            Przejdź do podsumowania
-                        </button>
+                        <Link to="/summary" className="dashboard-link">
+                            <button className="go-summary-button">
+                                Przejdź do podsumowania
+                            </button>
+                        </Link>
                         <button className="clear-summary-button" onClick={handleClearSummary}>
-                            Wyczyść podsumowanie
+                            <FontAwesomeIcon icon={faTrash}/>
                         </button>
                     </div>
                 </div>
@@ -121,11 +138,11 @@ function HomeCook() {
                                     <img src={product.imageURL || {placeholder}} onError={(e) => {
                                         console.log('Error image');
                                         e.target.src = placeholder;
-                                    }} alt="Product"/>
+                                    }} onClick={() => handleProductClick(product.homeProductID)} alt="Product"/>
                                 </div>
                                 <div className="product-details">
                                     <div className="product-name">{product.recipe}</div>
-                                    <div className="product-rating">{product.rating}</div>
+                                    <div className="product-rating">Rating {product.rating}</div>
                                 </div>
                                 <div className="add-to-cart-button" onClick={() => handleAddToSummary(product)}>
                                     <FontAwesomeIcon icon={faPlus}/>

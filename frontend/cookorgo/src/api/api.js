@@ -53,3 +53,41 @@ export const fetchProducts = async (categoryId, jwtToken) => {
         return [];
     }
 };
+
+export const fetchRestaurantCategories = async (profileId, jwtToken) => {
+
+    const response = await fetch(`${API_URL}/profiles/${profileId}/restaurant`, {
+        headers: {
+            Authorization: `Bearer ${jwtToken}`,
+        },
+    });
+    if (response.ok) {
+        const data = await response.json();
+        return data || [];
+    } else if (response.status === 401) {
+        throw new Error('Unauthorized');
+    } else {
+        console.error('Error fetching categories:');
+        return [];
+    }
+
+};
+export const fetchRestaurantProducts = async (categoryId, jwtToken) => {
+    try {
+        const response = await fetch(`${API_URL}/restaurant/${categoryId}/products`, {
+            headers: {
+                Authorization: `Bearer ${jwtToken}`,
+            },
+        });
+        const data = await response.json();
+        return data || [];
+    } catch (error) {
+        return [];
+    }
+};
+
+export const getProductDetails = async (categoryId, productId) => {
+    const response = await fetch(`${API_URL}/home/${categoryId}/products/${productId}`);
+    const data = await response.json();
+    return data;
+};

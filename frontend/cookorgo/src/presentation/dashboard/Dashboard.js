@@ -14,6 +14,7 @@ function Dashboard() {
         window.location.href = "/";
     };
     useEffect(() => {
+        localStorage.removeItem('summaryProducts');
         const token = localStorage.getItem('jwtToken');
         if (!token) {
             window.location.href = "/";

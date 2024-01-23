@@ -1,0 +1,85 @@
+.main-content-flex {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1; /* Zajmij dostępne miejsce na wysokość */
+    padding: 20px;
+}
+
+@media screen and (max-width: 600px) {
+    .main-content-flex {
+        display: flex;
+        background-color: white;
+    }
+    .product-page-container {
+        flex-wrap: wrap;
+    }
+    .product-details{
+        flex: 1;
+        display: block;
+    }
+
+    .ingredients, .recipe {
+        padding: initial;
+    }
+}
+
+.product-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 40px;
+    border-radius: 20px;
+    background-color: white;
+}
+
+.product-image-pdp img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 20px;
+    background-color: lightslategrey;
+}
+
+.cooking-time {
+    margin: 5px;
+    padding: 20px;
+    text-align: center;
+    width: 300px;
+    border-radius: 20px;
+    color: white;
+    background-color: #78C4A4;
+}
+
+.product-details {
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Dodatkowe style dla reszty informacji */
+.cooking-time {
+    font-weight: bold;
+}
+
+.ingredients, .recipe {
+    padding: 10px;
+}
+
+.back-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px;
+    background-color: #78C4A4;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.back-button:hover {
+    background-color: #5B8C6E;
+}
