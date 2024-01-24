@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {Link} from 'react-router-dom';  // Import React Router Link
+import {Link} from 'react-router-dom';
 import {faBook, faPlus, faTrash} from '@fortawesome/free-solid-svg-icons';
 import {fetchRestaurantCategories, fetchRestaurantProducts} from "../../api/api";
 import placeholder from "../../ui/placeholder.jpeg";
@@ -12,7 +12,7 @@ function Restaurants() {
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [selectedName, setSelectedName] = useState("");
     const [products, setProducts] = useState([]);
-    const [summaryProducts, setSummaryProducts] = useState([]); // New state for summary products
+    const [summaryProducts, setSummaryProducts] = useState([]);
 
     useEffect(() => {
         const storedSummaryProducts = JSON.parse(localStorage.getItem('summaryProducts')) || [];

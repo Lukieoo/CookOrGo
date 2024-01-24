@@ -12,10 +12,8 @@ export const fetchProfiles = async (jwtToken, throwErrorOn401 = false) => {
         const data = await response.json();
         return data;
     } else if (response.status === 401) {
-        // Obsłuż status 401 jako błąd
         throw new Error('Unauthorized');
     } else {
-        // Obsłuż inne błędy zapytania
         console.error('Błąd pobierania profili ');
         return [];
     }

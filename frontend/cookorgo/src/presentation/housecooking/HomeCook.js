@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {Link} from 'react-router-dom';  // Import React Router Link
+import {Link} from 'react-router-dom';
 import {faBook, faPlus, faTrash} from '@fortawesome/free-solid-svg-icons';
 import {fetchCategories, fetchProducts} from '../../api/api';
 import placeholder from "../../ui/placeholder.jpeg";
@@ -11,7 +11,7 @@ function HomeCook() {
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [selectedName, setSelectedName] = useState("");
     const [products, setProducts] = useState([]);
-    const [summaryProducts, setSummaryProducts] = useState([]); // New state for summary products
+    const [summaryProducts, setSummaryProducts] = useState([]);
 
     const handleLogout = () => {
         localStorage.removeItem('jwtToken');

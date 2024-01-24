@@ -23,23 +23,21 @@ function Home() {
         const token = localStorage.getItem('jwtToken');
 
         if (token) {
-            // Przekieruj użytkownika do innej trasy (nie stosując window.location.href)
-            setModalVisibility(false);  // Zamknij modal, jeśli otwarty
-            setShowLogin(true);  // Resetuj stan showLogin
+            setModalVisibility(false);
+            setShowLogin(true);
             window.location.href = '../dashboard';
         }
     }, []);
 
     const closeModal = () => {
         setModalVisibility(false);
-        // Resetowanie stanów pól po zamknięciu modala
         setUsernameLogin('');
         setPassword('');
         setRegisterEmail('');
         setUsername('');
         setRegisterPassword('');
-        setError(null); // Resetuj również błędy
-        setRegistrationSuccess(false); // Resetuj sukces rejestracji
+        setError(null);
+        setRegistrationSuccess(false);
         setEmailError(null);
         setPasswordError(null);
     };
@@ -56,8 +54,8 @@ function Home() {
         setEmailError(null);
         setPasswordError(null);
         if (token) {
-            setModalVisibility(false);  // Zamknij modal, jeśli otwarty
-            setShowLogin(true);  // Resetuj stan showLogin
+            setModalVisibility(false);
+            setShowLogin(true);
             window.location.href = '../dashboard';
             closeModal();
         } else {
@@ -89,7 +87,7 @@ function Home() {
     const openRegister = () => {
         setShowLogin(false);
         setModalVisibility(true);
-        setError(null); // Resetuj błędy przy otwieraniu modala
+        setError(null);
         setRegistrationSuccess(false);
         setEmailError(null);
         setPasswordError(null);

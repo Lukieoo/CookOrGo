@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import 'leaflet/dist/leaflet.css';
-import './SummaryWithMap.css';  // Zmiana nazwy pliku CSS
+import './SummaryWithMap.css';
 import MapComponent from '../../ui/MapComponent';
 import {Link} from "react-router-dom";
 

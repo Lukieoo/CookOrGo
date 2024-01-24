@@ -9,7 +9,6 @@ function SummaryPage() {
     const componentRef = useRef();
 
     useEffect(() => {
-        // Pobierz listę produktów z Local Storage podczas ładowania komponentu
         const storedSummaryProducts = JSON.parse(localStorage.getItem('summaryProducts')) || [];
         setSummaryProducts(storedSummaryProducts);
     }, []);

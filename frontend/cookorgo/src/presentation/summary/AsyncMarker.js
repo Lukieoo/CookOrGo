@@ -45,7 +45,7 @@ const AsyncMarker = ({restaurant}) => {
         return null;
     }
     const defaultMarkerIcon = new L.Icon({
-        iconUrl: marker, // Dodaj ścieżkę do pliku ikony
+        iconUrl: marker,
         iconSize: [32, 32],
         iconAnchor: [16, 32],
         popupAnchor: [0, -32],

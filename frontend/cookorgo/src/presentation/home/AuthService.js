@@ -1,4 +1,4 @@
-// W pliku np. AuthService.js
+
 const login = async (username, password) => {
     try {
         const response = await fetch('http://localhost:8080/auth/authenticate', {
