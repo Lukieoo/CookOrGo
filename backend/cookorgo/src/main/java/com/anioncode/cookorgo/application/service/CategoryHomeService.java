@@ -71,7 +71,6 @@ public class CategoryHomeService {
             CategoryHome categoryHome = optionalCategoryHome.get();
             Set<HomeProduct> homeProducts = categoryHome.getHomeProducts();
 
-            // Aktualizacja HomeProduct w CategoryHome
             homeProducts.stream()
                     .filter(homeProduct -> homeProduct.getHomeProductID().equals(homeProductId))
                     .findFirst()

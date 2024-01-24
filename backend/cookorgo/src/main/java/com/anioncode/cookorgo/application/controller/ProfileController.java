@@ -26,7 +26,6 @@ public class ProfileController {
         this.ProfileService = profileService;
     }
 
-    // Create a new Profile
     @CrossOrigin(origins = "http://localhost:3000")
     @PreAuthorize("hasAuthority('ROLE_USER')")
     @PostMapping
@@ -34,7 +33,6 @@ public class ProfileController {
         return ProfileService.createProfile(profile);
     }
 
-    // Get all Profiles
     @CrossOrigin(origins = "http://localhost:3000")
     @PreAuthorize("hasAuthority('ROLE_USER')")
     @GetMapping
@@ -42,7 +40,6 @@ public class ProfileController {
         return ProfileService.getAllProfiles();
     }
 
-    // Get Profile by ID
     @CrossOrigin(origins = "http://localhost:3000")
     @PreAuthorize("hasAuthority('ROLE_USER')")
     @GetMapping("/{id}")
@@ -50,7 +47,6 @@ public class ProfileController {
         return ProfileService.getProfileById(id);
     }
 
-    // Update Profile by ID
     @CrossOrigin(origins = "http://localhost:3000")
     @PreAuthorize("hasAuthority('ROLE_USER')")
     @PutMapping("/{id}")
@@ -58,7 +54,6 @@ public class ProfileController {
         return ProfileService.updateProfile(id, profileDetails);
     }
 
-    // Delete all Profiles
     @CrossOrigin(origins = "http://localhost:3000")
     @PreAuthorize("hasAuthority('ROLE_USER')")
     @DeleteMapping
@@ -67,7 +62,6 @@ public class ProfileController {
         return "All Profiles have been deleted successfully.";
     }
 
-    // Delete Profile by ID
     @CrossOrigin(origins = "http://localhost:3000")
     @PreAuthorize("hasAuthority('ROLE_USER')")
     @DeleteMapping("/{id}")
@@ -75,7 +69,6 @@ public class ProfileController {
         ProfileService.deleteProfile(id);
     }
 
-    //Category Home
     @CrossOrigin(origins = "http://localhost:3000")
     @PreAuthorize("hasAuthority('ROLE_USER')")
     @PostMapping("/{profileId}/home")
@@ -131,7 +124,6 @@ public class ProfileController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PreAuthorize("hasAuthority('ROLE_USER')")
-    //Restaurant Products
     @PostMapping("/{profileId}/restaurant")
     public ResponseEntity<Profile> addCategoryRestaurantToProfile(@PathVariable Long profileId, @RequestBody CategoryRestaurant categoryRestaurant) {
         Profile updatedProfile = ProfileService.addCategoryRestaurantToProfile(profileId, categoryRestaurant);

@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-// This class helps us to validate the generated jwt token
 @Component
 public class JwtAuthFilter extends OncePerRequestFilter {
 

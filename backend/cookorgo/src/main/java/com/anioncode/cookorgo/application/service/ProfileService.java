@@ -23,22 +23,18 @@ public class ProfileService {
         this.categoryRestaurantRepository = categoryRestaurantRepository;
     }
 
-    // Create a new Profile
     public Profile createProfile(Profile profile) {
         return ProfileRepository.save(profile);
     }
 
-    // Get all Profiles
     public List<Profile> getAllProfiles() {
         return ProfileRepository.findAll();
     }
 
-    // Get Profile by ID
     public Optional<Profile> getProfileById(Long id) {
         return ProfileRepository.findById(id);
     }
 
-    // Update Profile
     public Profile updateProfile(Long id, Profile profileDetails) {
         Optional<Profile> Profile = ProfileRepository.findById(id);
         if (Profile.isPresent()) {
@@ -50,22 +46,18 @@ public class ProfileService {
         return null;
     }
 
-    // Delete all Profiles
     public void deleteAllProfiles() {
         ProfileRepository.deleteAll();
     }
 
-    // Delete Profile
     public void deleteProfile(Long id) {
         ProfileRepository.deleteById(id);
     }
 
-    // Metoda do dodawania nowej kategorii do użytkownika
     public Profile addCategoryToProfile(Long ProfileId, CategoryHome categoryHome) {
         Optional<Profile> optionalProfile = ProfileRepository.findById(ProfileId);
         if (optionalProfile.isPresent()) {
             Profile profile = optionalProfile.get();
-            // Zapisz kategorię do repozytorium
             categoryHomeRepository.save(categoryHome);
             profile.getCategoryHomes().add(categoryHome);
             return ProfileRepository.save(profile);
@@ -77,7 +69,6 @@ public class ProfileService {
         Optional<Profile> optionalProfile = ProfileRepository.findById(ProfileId);
         if (optionalProfile.isPresent()) {
             Profile profile = optionalProfile.get();
-            // Zapisz kategorię do repozytorium
             categoryRestaurantRepository.save(categoryRestaurant);
             profile.getCategoryRestaurants().add(categoryRestaurant);
             return ProfileRepository.save(profile);

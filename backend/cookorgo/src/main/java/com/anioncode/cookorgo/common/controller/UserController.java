@@ -45,10 +45,8 @@ public class UserController {
     @PreAuthorize("hasAuthority('ROLE_USER')")
     @PostMapping("/add-profile")
     public ResponseEntity<String> addProfile(@RequestBody Profile profile, Authentication authentication) {
-        // Pobieranie nazwy użytkownika z kontekstu uwierzytelniania
         String username = authentication.getName();
 
-        // Dodawanie profilu do konkretnego użytkownika
         userService.addProfileToUser(username, profile);
 
         return ResponseEntity.ok("Profile added successfully");

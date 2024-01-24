@@ -15,7 +15,6 @@ import java.util.Set;
 @Entity
 @Table(name = "profiles")
 public class Profile {
-    // Constructors, Getters, and Setters
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
