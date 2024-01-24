@@ -1,19 +1,22 @@
 import React, {useState, useEffect} from 'react';
 import {Link, useParams} from 'react-router-dom';
-import {getProductDetails} from '../../api/api';
+import {getProductRestaurantDetails} from '../../api/api';
+import {renderStarRating} from '../../ui/effects';
 import './ProductPage.css';
 import placeholder from "../../ui/placeholder.jpeg";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
+import vegan from "../../ui/vegan.png";
+import spicy from "../../ui/spicy.png";
 
-function ProductPage() {
+function RestaurantProductPage() {
     const {categoryId, productId} = useParams();
     const [productDetails, setProductDetails] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = await getProductDetails(categoryId, productId);
+                const data = await getProductRestaurantDetails(categoryId, productId);
                 setProductDetails(data);
             } catch (error) {
                 console.error('Error fetching product details', error);
@@ -26,8 +29,9 @@ function ProductPage() {
         const storedSummaryProducts = JSON.parse(localStorage.getItem('summaryProducts')) || [];
         storedSummaryProducts.push(productDetails);
         localStorage.setItem('summaryProducts', JSON.stringify(storedSummaryProducts));
-        window.location.href = '/homeCook';
+        window.location.href = '/restaurants';
     };
+
     return (
         <div className="main-content-flex">
             <div className="product-page-container">
@@ -38,18 +42,23 @@ function ProductPage() {
                                 console.log('Error image');
                                 e.target.src = placeholder;
                             }} alt="Product"/>
-                            <div className="cooking-time">Cooking Time: {productDetails.cookingTime} minutes</div>
                         </div>
                         <div className="product-details">
-
-                            <div className="ingredients">
-                                <h3>Ingredients:</h3>
-                                <p>{productDetails.ingredients}</p>
+                            <div className="product-name">{productDetails.name}
+                                {productDetails.vegetarian &&
+                                    <img src={vegan} alt="Vegan" style={{width: '20px', marginLeft: '5px'}}/>}
+                                {productDetails.spicy &&
+                                    <img src={spicy} alt="Spicy" style={{width: '20px', marginLeft: '5px'}}/>}
                             </div>
-                            <div className="recipe">
-                                <h3>Recipe:</h3>
-                                <p>{productDetails.recipe}</p>
+                            <div className="product-rating">
+                                {renderStarRating(productDetails.rating)}
                             </div>
+                            <div className="product-rating">{productDetails.description}</div>
+                            <div className="product-price">{productDetails.price} {productDetails.currency}</div>
+                            <p></p>
+                            <div className="product-restaurant">{productDetails.restaurant.name}</div>
+                            <div
+                                className="product-adress">{productDetails.restaurant.address.city} {productDetails.restaurant.address.street} </div>
                         </div>
 
                     </>
@@ -61,9 +70,9 @@ function ProductPage() {
                     <FontAwesomeIcon icon={faPlus}/>
                 </div>
             </div>
-            <Link to="/homeCook" className="back-button">Back</Link>
+            <Link to="/restaurants" className="back-button">Back</Link>
         </div>
     );
 }
 
-export default ProductPage;
+export default RestaurantProductPage;

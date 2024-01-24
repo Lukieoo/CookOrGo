@@ -114,7 +114,7 @@ function HomeCook() {
                         <div className="summary-products">
                             {summaryProducts.map((product, index) => (
                                 <div key={index} className="summary-product">
-                                    {product.recipe}
+                                    {product.recipe.length > 20 ? `${product.recipe.substring(0, 20)}...` : product.recipe}
                                 </div>
                             ))}
                         </div>
@@ -141,7 +141,8 @@ function HomeCook() {
                                     }} onClick={() => handleProductClick(product.homeProductID)} alt="Product"/>
                                 </div>
                                 <div className="product-details">
-                                    <div className="product-name">{product.recipe}</div>
+                                    <div
+                                        className="product-name">{product.recipe.length > 20 ? `${product.recipe.substring(0, 20)}...` : product.recipe}</div>
                                     <div className="product-rating">Rating {product.rating}</div>
                                 </div>
                                 <div className="add-to-cart-button" onClick={() => handleAddToSummary(product)}>

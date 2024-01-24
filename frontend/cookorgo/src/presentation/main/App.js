@@ -7,6 +7,8 @@ import Restaurants from "../restaurant/Restaurants";
 import HomeCook from "../housecooking/HomeCook";
 import ProductPage from '../product/ProductPage';
 import SummaryPage from '../summary/SummaryPage';
+import RestaurantProductPage from "../product/RestaurantProductPage";
+import SummaryAndMap from "../summary/SummaryAndMap";
 
 export default class App extends Component {
     render() {
@@ -18,7 +20,9 @@ export default class App extends Component {
                     <Route exact path={"/restaurants"} element={<Restaurants/>}/>
                     <Route exact path={"/homeCook"} element={<HomeCook/>}/>
                     <Route exact path={"/summary"} element={<SummaryPage />} />
+                    <Route exact path={"/summaryAndMap"} element={<SummaryAndMap />} />
                     <Route path="/products/:categoryId/:productId" element={<ProductPage/>}/>
+                    <Route path="/restaurants/:categoryId/:productId" element={<RestaurantProductPage/>}/>
                 </Routes>
             </Router>
         );

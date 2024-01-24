@@ -1,0 +1,50 @@
+.total-price-section {
+    margin-top: 20px;
+    background-color: #f8f8f8;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.total-price {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+}
+.map-section {
+    margin-top: 20px;
+    width: 50%;
+}
+
+.summary-and-map-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    margin-top: 20px;
+    border-radius: 8px;
+    background-color: #f8f8f8;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.map-section {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.map-heading {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.summary-restaurant-sum {
+    flex: 1;
+    padding: 15px;
+
+    overflow-y: auto; /* Dodane, aby dodać pasek przewijania, jeśli zawartość jest zbyt długa */
+}
+
+/* Dodaj odpowiednie style dla każdej restauracji */
+.summary-restaurant-sum p {
+    margin: 40px;
+}

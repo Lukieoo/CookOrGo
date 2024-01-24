@@ -91,3 +91,8 @@ export const getProductDetails = async (categoryId, productId) => {
     const data = await response.json();
     return data;
 };
+export const getProductRestaurantDetails = async (categoryId, productId) => {
+    const response = await fetch(`${API_URL}/restaurant/${categoryId}/products/${productId}`);
+    const data = await response.json();
+    return data;
+};

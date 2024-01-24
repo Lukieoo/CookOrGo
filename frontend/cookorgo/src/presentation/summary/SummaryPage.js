@@ -1,8 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 import './SummaryPage.css';
-import { Document, Page, pdfjs } from 'react-pdf';
 import {Link} from "react-router-dom";
-import jsPDF from 'jspdf';
 
 import { useReactToPrint } from 'react-to-print';
 

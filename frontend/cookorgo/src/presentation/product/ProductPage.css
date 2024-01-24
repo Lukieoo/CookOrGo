@@ -24,7 +24,9 @@
         padding: initial;
     }
 }
-
+.product-price{
+    font-weight: bold;
+}
 .product-page-container {
     display: flex;
     justify-content: center;

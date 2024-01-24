@@ -1,7 +1,6 @@
 package com.anioncode.cookorgo.auth.config;
 
 import com.anioncode.cookorgo.auth.filter.JwtAuthFilter;
-import com.anioncode.cookorgo.auth.filter.JwtExpiredExceptionHandler;
 import com.anioncode.cookorgo.auth.service.AuthEntryPointJwt;
 import com.anioncode.cookorgo.auth.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;

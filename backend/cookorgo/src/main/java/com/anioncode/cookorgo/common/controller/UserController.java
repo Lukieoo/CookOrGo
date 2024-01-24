@@ -10,7 +10,10 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @Tag(name = "User")
@@ -20,22 +23,24 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
     @CrossOrigin(origins = "http://localhost:3000")
     @PreAuthorize("hasAuthority('ROLE_USER')")
     @GetMapping("/my-profiles")
-    public ResponseEntity<Set<Profile>> getMyProfiles(Authentication authentication) {
-        // Pobieranie nazwy użytkownika z kontekstu uwierzytelniania
-        if (authentication!=null) {
+    public ResponseEntity<List<Profile>> getMyProfiles(Authentication authentication) {
+        if (authentication != null) {
             String username = authentication.getName();
+            List<Profile> userProfiles = userService.getProfilesByUsername(username).stream().toList();
+            List<Profile> sortedProfiles = userProfiles.stream()
+                    .sorted(Comparator.comparing(Profile::getId))
+                    .toList();
 
-            // Pobieranie profili dla konkretnego użytkownika
-            Set<Profile> userProfiles = userService.getProfilesByUsername(username);
-
-            return ResponseEntity.ok(userProfiles);
-        }else {
-            return  ResponseEntity.badRequest().build();
+            return ResponseEntity.ok(sortedProfiles);
+        } else {
+            return ResponseEntity.badRequest().build();
         }
     }
+
     @CrossOrigin(origins = "http://localhost:3000")
     @PreAuthorize("hasAuthority('ROLE_USER')")
     @PostMapping("/add-profile")
