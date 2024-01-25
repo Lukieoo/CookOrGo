@@ -4,8 +4,10 @@ import com.anioncode.cookorgo.application.model.home.CategoryHome;
 import com.anioncode.cookorgo.application.model.restaurant.CategoryRestaurant;
 import com.anioncode.cookorgo.application.service.ProfileService;
 import com.anioncode.cookorgo.application.model.Profile;
+import io.swagger.v3.core.util.Json;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -65,8 +67,9 @@ public class ProfileController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PreAuthorize("hasAuthority('ROLE_USER')")
     @DeleteMapping("/{id}")
-    public void deleteProfile(@PathVariable Long id) {
+    public ResponseEntity<String> deleteProfile(@PathVariable Long id) {
         ProfileService.deleteProfile(id);
+        return ResponseEntity.ok("{}");
     }
 
     @CrossOrigin(origins = "http://localhost:3000")

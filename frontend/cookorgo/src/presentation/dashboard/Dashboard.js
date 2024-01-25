@@ -4,6 +4,9 @@ import logo from "../../ui/logo.png";
 import option_restaurant from "../../ui/option_restaurant.png";
 import option_home from "../../ui/option_home.png";
 import {fetchProfiles} from '../../api/api';
+import {faUserEdit} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {Link} from "react-router-dom";
 
 function Dashboard() {
     const [profiles, setProfiles] = useState([]);
@@ -55,6 +58,11 @@ function Dashboard() {
                     <button className="login-button" onClick={handleLogout}>
                         Log Out
                     </button>
+                    <Link to="/configure">
+                        <div className="add-to-cart-button">
+                            <FontAwesomeIcon icon={faUserEdit}/>
+                        </div>
+                    </Link>
                 </div>
             </div>
 

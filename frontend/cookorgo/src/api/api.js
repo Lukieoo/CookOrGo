@@ -19,6 +19,7 @@ export const fetchProfiles = async (jwtToken, throwErrorOn401 = false) => {
     }
 
 };
+
 export const fetchCategories = async (profileId, jwtToken) => {
 
     const response = await fetch(`${API_URL}/profiles/${profileId}/home`, {
@@ -93,4 +94,114 @@ export const getProductRestaurantDetails = async (categoryId, productId) => {
     const response = await fetch(`${API_URL}/restaurant/${categoryId}/products/${productId}`);
     const data = await response.json();
     return data;
+};
+const headers = (token) => ({
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`,
+});
+
+const handleResponse = async (response) => {
+    if (response.ok) {
+        if (response.status === 204) {
+            // Pusta odpowiedź (No Content)
+            return null;
+        } else {
+            return response.json();
+        }
+    } else {
+        const error = await response.json();
+        throw new Error(error.message || 'Wystąpił błąd.');
+    }
+};
+
+export const addProfile = async (token, profileData) => {
+    const url = `${[API_URL]}/user/add-profile`;
+
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+            profileName: profileData.profileName,
+            email: profileData.email,
+            address: {
+                street: profileData.address.street,
+                city: profileData.address.city,
+                state: profileData.address.state,
+                postalCode: profileData.address.postalCode,
+                country: profileData.address.country,
+            },
+        }),
+    });
+
+    return handleResponse(response);
+};
+export const addRestaurantToProfile = async (token, profileID, restaurantData) => {
+    const url = `${API_URL}/profiles/${profileID}/restaurant`;
+
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(restaurantData),
+    });
+
+    return handleResponse(response);
+};
+export const addHomeToProfile = async (token, profileID, restaurantData) => {
+    const url = `${API_URL}/profiles/${profileID}/home`;
+
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: headers(token),
+        body: JSON.stringify(restaurantData),
+    });
+
+    return handleResponse(response);
+};
+export const deleteRestaurantFromProfile = async (token, profileID, restaurantID) => {
+
+    const url = `${API_URL}/profiles/${profileID}/restaurant/${restaurantID}`;
+
+    const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
+    return handleResponse(response);
+};
+export const deleteHomeFromProfile = async (token, profileID, homeID) => {
+
+    const url = `${API_URL}/profiles/${profileID}/home/${homeID}`;
+
+    const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
+    return handleResponse(response);
+};
+export const deleteProfile = async (token, profileID) => {
+
+    const url = `${API_URL}/profiles/${profileID}`;
+
+    const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
+    return handleResponse(response);
 };

@@ -6,72 +6,90 @@ import com.anioncode.cookorgo.application.dao.ProfileRepository;
 import com.anioncode.cookorgo.application.model.Profile;
 import com.anioncode.cookorgo.application.model.home.CategoryHome;
 import com.anioncode.cookorgo.application.model.restaurant.CategoryRestaurant;
+import com.anioncode.cookorgo.common.model.UserInfo;
+import com.anioncode.cookorgo.common.repository.UserInfoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class ProfileService {
-    private final ProfileRepository ProfileRepository;
+    private final ProfileRepository profileRepository;
     private final CategoryHomeRepository categoryHomeRepository;
+    private final UserInfoRepository userInfoRepository;
     private final CategoryRestaurantRepository categoryRestaurantRepository;
 
-    public ProfileService(ProfileRepository ProfileRepository, CategoryHomeRepository categoryHomeRepository, CategoryRestaurantRepository categoryRestaurantRepository) {
-        this.ProfileRepository = ProfileRepository;
+    public ProfileService(ProfileRepository profileRepository, UserInfoRepository userInfoRepository, CategoryHomeRepository categoryHomeRepository, CategoryRestaurantRepository categoryRestaurantRepository) {
+        this.profileRepository = profileRepository;
         this.categoryHomeRepository = categoryHomeRepository;
+        this.userInfoRepository = userInfoRepository;
         this.categoryRestaurantRepository = categoryRestaurantRepository;
     }
 
     public Profile createProfile(Profile profile) {
-        return ProfileRepository.save(profile);
+        return profileRepository.save(profile);
     }
 
     public List<Profile> getAllProfiles() {
-        return ProfileRepository.findAll();
+        return profileRepository.findAll();
     }
 
     public Optional<Profile> getProfileById(Long id) {
-        return ProfileRepository.findById(id);
+        return profileRepository.findById(id);
     }
 
     public Profile updateProfile(Long id, Profile profileDetails) {
-        Optional<Profile> Profile = ProfileRepository.findById(id);
+        Optional<Profile> Profile = profileRepository.findById(id);
         if (Profile.isPresent()) {
             Profile existingProfile = Profile.get();
             existingProfile.setAddress(profileDetails.getAddress());
             existingProfile.setCategoryHomes(profileDetails.getCategoryHomes());
-            return ProfileRepository.save(existingProfile);
+            return profileRepository.save(existingProfile);
         }
         return null;
     }
 
     public void deleteAllProfiles() {
-        ProfileRepository.deleteAll();
+        profileRepository.deleteAll();
     }
 
     public void deleteProfile(Long id) {
-        ProfileRepository.deleteById(id);
+        Optional<Profile> optionalProfile = profileRepository.findById(id);
+        if (optionalProfile.isPresent()) {
+            Profile profile = optionalProfile.get();
+
+            // Pobierz użytkowników, którzy posiadają ten profil
+            Set<UserInfo> usersWithProfile = userInfoRepository.findByProfiles(profile);
+
+            // Usuń profil z użytkowników
+            usersWithProfile.forEach(userInfo -> userInfo.getProfiles().remove(profile));
+
+            // Usuń profil
+            profileRepository.deleteById(id);
+        }
     }
 
+
     public Profile addCategoryToProfile(Long ProfileId, CategoryHome categoryHome) {
-        Optional<Profile> optionalProfile = ProfileRepository.findById(ProfileId);
+        Optional<Profile> optionalProfile = profileRepository.findById(ProfileId);
         if (optionalProfile.isPresent()) {
             Profile profile = optionalProfile.get();
             categoryHomeRepository.save(categoryHome);
             profile.getCategoryHomes().add(categoryHome);
-            return ProfileRepository.save(profile);
+            return profileRepository.save(profile);
         }
         return null;
     }
 
     public Profile addCategoryRestaurantToProfile(Long ProfileId, CategoryRestaurant categoryRestaurant) {
-        Optional<Profile> optionalProfile = ProfileRepository.findById(ProfileId);
+        Optional<Profile> optionalProfile = profileRepository.findById(ProfileId);
         if (optionalProfile.isPresent()) {
             Profile profile = optionalProfile.get();
             categoryRestaurantRepository.save(categoryRestaurant);
             profile.getCategoryRestaurants().add(categoryRestaurant);
-            return ProfileRepository.save(profile);
+            return profileRepository.save(profile);
         }
         return null;
     }

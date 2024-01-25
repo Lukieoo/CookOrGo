@@ -44,11 +44,11 @@ public class UserController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PreAuthorize("hasAuthority('ROLE_USER')")
     @PostMapping("/add-profile")
-    public ResponseEntity<String> addProfile(@RequestBody Profile profile, Authentication authentication) {
+    public ResponseEntity<Profile> addProfile(@RequestBody Profile profile, Authentication authentication) {
         String username = authentication.getName();
 
         userService.addProfileToUser(username, profile);
 
-        return ResponseEntity.ok("Profile added successfully");
+        return ResponseEntity.ok(profile);
     }
 }

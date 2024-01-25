@@ -9,6 +9,7 @@ import ProductPage from '../product/ProductPage';
 import SummaryPage from '../summary/SummaryPage';
 import RestaurantProductPage from "../product/RestaurantProductPage";
 import SummaryAndMap from "../summary/SummaryAndMap";
+import Configure from "../configure/Configure";
 
 export default class App extends Component {
     render() {
@@ -21,6 +22,7 @@ export default class App extends Component {
                     <Route exact path={"/homeCook"} element={<HomeCook/>}/>
                     <Route exact path={"/summary"} element={<SummaryPage />} />
                     <Route exact path={"/summaryAndMap"} element={<SummaryAndMap />} />
+                    <Route exact path={"/configure"} element={<Configure />} />
                     <Route path="/products/:categoryId/:productId" element={<ProductPage/>}/>
                     <Route path="/restaurants/:categoryId/:productId" element={<RestaurantProductPage/>}/>
                 </Routes>
