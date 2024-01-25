@@ -138,94 +138,127 @@ const ConfigureSite = () => {
             setSelectedHomeCategoryId(null);
         }
     };
-    return (<div>
-        <h1>Konfiguracja Strony</h1>
-        <label>Wybierz Profil:</label>
-        <select value={selectedProfileId || ''} onChange={handleProfileChange}>
-            <option value="">Wybierz profil...</option>
-            {profiles.map(profile => (<option key={profile.id} value={profile.id}>
-                {profile.profileName}
-            </option>))}
-        </select>
+    return (
+        <div className="configure-site-container">
+            <h1>Konfiguracja Strony</h1>
 
-        <button onClick={handleAddProfileClick}>+</button>
-        <div>
-            {selectedProfileId && (
-                <div>
-                    <p>Wybrany profil: {selectedProfileId}
-                        <button onClick={handleDeleteProfile}>
-                            <FontAwesomeIcon icon={faTrash}/>
-                        </button>
-                    </p>
-                </div>
-            )}
-        </div>
-        {isAddProfileFormVisible && (<form onSubmit={handleAddProfileSubmit}>
-            {/* Formularz do dodawania nowego profilu */}
-            <label>Nazwa Profilu:</label>
-            <input
-                type="text"
-                name="profileName"
-                placeholder="Nazwa Profilu"
-                value={newProfileData.profileName}
-                onChange={handleFormInputChange}
-            />
+            <label className="config-label">Wybierz Profil:</label>
+            <select
+                value={selectedProfileId || ''}
+                onChange={handleProfileChange}
+                className="config-select"
+            >
+                <option value="">Wybierz profil...</option>
+                {profiles.map(profile => (
+                    <option key={profile.id} value={profile.id}>
+                        {profile.profileName}
+                    </option>
+                ))}
+            </select>
 
-            <label>Email:</label>
-            <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={newProfileData.email}
-                onChange={handleFormInputChange}
-            />
-
-            <label>Adres:</label>
-            <input
-                type="text"
-                name="city"
-                placeholder="Miasto"
-                value={newProfileData.address.city}
-                onChange={handleAddressInputChange}
-            />
-            <input
-                type="text"
-                name="street"
-                placeholder="Ulica i numer domu"
-                value={newProfileData.address.street}
-                onChange={handleAddressInputChange}
-            />
-            {/* Dodaj pozostałe pola adresu */}
-
-            <button type="submit">Dodaj Profil</button>
-            <button onClick={handleClose}>
-                <FontAwesomeIcon icon={faClose}/>
+            <button
+                onClick={handleAddProfileClick}
+                className="config-button"
+            >
+                +
             </button>
-        </form>)}
 
+            <div className="selection-section">
+                {selectedProfileId && (
+                    <div>
+                        <p className="selected-profile">
+                            Wybrany profil: {selectedProfileId}
+                            <button
+                                onClick={handleDeleteProfile}
+                                className="config-button-delete"
+                            >
+                                <FontAwesomeIcon icon={faTrash}/>
+                            </button>
+                        </p>
+                    </div>
+                )}
+            </div>
 
-        <label>Wybierz Kategorię Home:</label>
-        <select value={selectedHomeCategoryId || ''} onChange={handleCategoryChange}>
-            <option value="">Wybierz kategorię...</option>
-            {categoriesHome.map(category => (
-                <option key={category.categoryHomeID} value={category.categoryHomeID}>
-                    {category.name}
-                </option>
-            ))}
-        </select>
-        <div>
-            {selectedHomeCategoryId && (
-                <div>
-                    <p>Wybrana kategoria : {selectedHomeCategoryId}
-                        <button onClick={handleDeleteCategoryHome}>
+            {isAddProfileFormVisible && (
+                <form onSubmit={handleAddProfileSubmit} className="add-profile-form">
+                    {/* Formularz do dodawania nowego profilu */}
+                    <label className="config-label">Nazwa Profilu:</label>
+                    <input
+                        type="text"
+                        name="profileName"
+                        placeholder="Nazwa Profilu"
+                        value={newProfileData.profileName}
+                        onChange={handleFormInputChange}
+                        className="config-input"
+                    />
+
+                    <label className="config-label">Email:</label>
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        value={newProfileData.email}
+                        onChange={handleFormInputChange}
+                        className="config-input"
+                    />
+
+                    <label className="config-label">Adres:</label>
+                    <input
+                        type="text"
+                        name="city"
+                        placeholder="Miasto"
+                        value={newProfileData.address.city}
+                        onChange={handleAddressInputChange}
+                        className="config-input"
+                    />
+                    <input
+                        type="text"
+                        name="street"
+                        placeholder="Ulica i numer domu"
+                        value={newProfileData.address.street}
+                        onChange={handleAddressInputChange}
+                        className="config-input"
+                    />
+                    {/* Dodaj pozostałe pola adresu */}
+
+                    <button type="submit" className="config-button-submit">Dodaj Profil</button>
+                    <button onClick={handleClose} className="config-button-close">
+                        <FontAwesomeIcon icon={faClose}/>
+                    </button>
+                </form>
+            )}
+
+            <label className="config-label">Wybierz Kategorię Home:</label>
+            <select
+                value={selectedHomeCategoryId || ''}
+                onChange={handleCategoryChange}
+                className="config-select"
+            >
+                <option value="">Wybierz kategorię...</option>
+                {categoriesHome.map(category => (
+                    <option key={category.categoryHomeID} value={category.categoryHomeID}>
+                        {category.name}
+                    </option>
+                ))}
+            </select>
+            <div className="selection-section">
+                {selectedHomeCategoryId && (
+                    <div>
+                        <p className="selected-category">
+                            Wybrana kategoria : {selectedHomeCategoryId}
+
+                        </p>
+                        <button
+                            onClick={handleDeleteCategoryHome}
+                            className="config-button-delete">
                             <FontAwesomeIcon icon={faTrash}/>
                         </button>
-                    </p>
-                </div>
-            )}
+                    </div>
+                )}
+            </div>
+            <Link to="/dashboard" className="back-button">Back</Link>
         </div>
-        <Link to="/dashboard" className="back-button">Back</Link>
-    </div>);
+    );
 };
 
 export default ConfigureSite;
