@@ -75,12 +75,12 @@ public class ProfileController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PreAuthorize("hasAuthority('ROLE_USER')")
     @PostMapping("/{profileId}/home")
-    public ResponseEntity<Profile> addCategoryToProfile(@PathVariable Long profileId, @RequestBody CategoryHome categoryHome) {
+    public ResponseEntity<CategoryHome> addCategoryToProfile(@PathVariable Long profileId, @RequestBody CategoryHome categoryHome) {
         Profile updatedProfile = ProfileService.addCategoryToProfile(profileId, categoryHome);
         if (updatedProfile == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(updatedProfile);
+        return ResponseEntity.ok(categoryHome);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
@@ -128,12 +128,12 @@ public class ProfileController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PreAuthorize("hasAuthority('ROLE_USER')")
     @PostMapping("/{profileId}/restaurant")
-    public ResponseEntity<Profile> addCategoryRestaurantToProfile(@PathVariable Long profileId, @RequestBody CategoryRestaurant categoryRestaurant) {
+    public ResponseEntity<CategoryRestaurant> addCategoryRestaurantToProfile(@PathVariable Long profileId, @RequestBody CategoryRestaurant categoryRestaurant) {
         Profile updatedProfile = ProfileService.addCategoryRestaurantToProfile(profileId, categoryRestaurant);
         if (updatedProfile == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(updatedProfile);
+        return ResponseEntity.ok(categoryRestaurant);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
