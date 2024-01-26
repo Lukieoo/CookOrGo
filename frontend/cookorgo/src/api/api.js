@@ -103,7 +103,6 @@ const headers = (token) => ({
 const handleResponse = async (response) => {
     if (response.ok) {
         if (response.status === 204) {
-            // Pusta odpowiedź (No Content)
             return null;
         } else {
             return response.json();
@@ -148,6 +147,20 @@ export const addRestaurantToProfile = async (token, profileID, restaurantData) =
             Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(restaurantData),
+    });
+
+    return handleResponse(response);
+};
+export const addProductsToRestaurant = async (token, restaurantID, productData) => {
+    const url = `${API_URL}/restaurant/${restaurantID}/products`;
+
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(productData),
     });
 
     return handleResponse(response);

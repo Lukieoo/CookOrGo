@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import './SummaryPage.css';
 import {Link} from "react-router-dom";
 
-import { useReactToPrint } from 'react-to-print';
+import {useReactToPrint} from 'react-to-print';
 
 function SummaryPage() {
     const [summaryProducts, setSummaryProducts] = useState([]);
@@ -28,7 +28,7 @@ function SummaryPage() {
                             {/* Dodaj inne informacje o produkcie, jeśli są dostępne */}
                             {product.ingredients && <p>Potrzebne składniki: {product.ingredients}</p>}
                             {product.cookingTime && <p>Czas przygotowania: {product.cookingTime} minut</p>}
-                            {product.recipe && <p>Potrzebne: {product.cookingTime} minut</p>}
+
                         </div>
                     ))}
                 </div>

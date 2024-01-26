@@ -21,7 +21,7 @@ public class CategoryRestaurantController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/{categoryRestaurantId}/products")
-    public ResponseEntity<CategoryRestaurant> addRestaurantProductToCategoryRestaurant(
+    public ResponseEntity<RestaurantProduct> addRestaurantProductToCategoryRestaurant(
             @PathVariable Long categoryRestaurantId,
             @RequestBody RestaurantProduct restaurantProduct
     ) {
@@ -29,7 +29,7 @@ public class CategoryRestaurantController {
         if (updatedCategoryRestaurant == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok(restaurantProduct);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")

@@ -8,12 +8,13 @@ import {
     deleteRestaurantFromProfile,
     fetchCategories,
     fetchProfiles,
-    fetchRestaurantCategories
+    fetchRestaurantCategories, fetchRestaurantProducts, getProductRestaurantDetails
 } from "../../api/api";
 import './configure.css';
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faTrash, faClose} from "@fortawesome/free-solid-svg-icons";
+import {faTrash, faClose, faCocktail} from "@fortawesome/free-solid-svg-icons";
+import ProductModal from "./ProductModal";
 
 const ConfigureSite = () => {
     const [profiles, setProfiles] = useState([]);
@@ -34,13 +35,43 @@ const ConfigureSite = () => {
             street: '', city: '', state: '', postalCode: '', country: '',
         },
     });
-
+    const handleLogout = () => {
+        localStorage.removeItem('jwtToken');
+        localStorage.removeItem('selectedProfileId')
+        window.location.href = "/";
+    };
     const [newCategoryHomeData, setNewCategoryHomeData] = useState({
         name: '',
     });
     const [newCategoryRestaurantData, setNewCategoryRestaurantData] = useState({
         name: '',
     });
+    //Modal
+    const [isProductModalVisible, setIsProductModalVisible] = useState(false);
+    const [products, setProducts] = useState([]);
+
+    const handleAddProduct = async () => {
+        const token = localStorage.getItem('jwtToken');
+        if (selectedRestaurantCategoryId !== null) {
+            fetchRestaurantProducts(selectedRestaurantCategoryId, token)
+                .then(data => {
+                    setProducts(data);
+                })
+                .catch(error => {
+                    if (error.message === 'Unauthorized') {
+                        handleLogout()
+                    } else {
+                        console.error('Inny błąd:', error.message);
+                    }
+                });
+        }
+
+        setIsProductModalVisible(true);
+    };
+
+    const handleCloseProductModal = () => {
+        setIsProductModalVisible(false);
+    };
     useEffect(() => {
         const token = localStorage.getItem('jwtToken');
         if (!token) {
@@ -64,7 +95,7 @@ const ConfigureSite = () => {
     const handleProfileChange = (event) => {
         const selectedId = parseInt(event.target.value);
         setSelectedProfileId(selectedId);
-        setSelectedHomeCategoryId(null); // Reset selected category when profile changes
+        setSelectedHomeCategoryId(null);
     };
     useEffect(() => {
         const token = localStorage.getItem('jwtToken');
@@ -227,6 +258,7 @@ const ConfigureSite = () => {
             setSelectedHomeCategoryId(null);
         }
     };
+
     const handleDeleteCategoryRestaurant = async () => {
         const token = localStorage.getItem('jwtToken');
 
@@ -396,10 +428,16 @@ const ConfigureSite = () => {
                         className="config-button-delete">
                         <FontAwesomeIcon icon={faTrash}/>
                     </button>
+                    <button onClick={handleAddProduct} className="config-button">
+                        <FontAwesomeIcon icon={faCocktail}/>
+                    </button>
                 </p>
-
             </div>)}
         </div>
+        {isProductModalVisible && (
+            <ProductModal products={products} selectedCategory={selectedRestaurantCategoryId}
+                          onClose={handleCloseProductModal}/>
+        )}
         {isAddCategoryRestaurantFormVisible && (
             <form onSubmit={handleAddCategoryRestaurantSubmit} className="add-profile-form">
                 <label className="config-label">Nazwa Kategorii:</label>
