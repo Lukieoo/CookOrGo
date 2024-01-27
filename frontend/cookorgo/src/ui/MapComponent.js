@@ -8,7 +8,7 @@ const MapComponent = ({restaurants}) => {
     const mapRef = useRef(null);
 
     return (
-        <MapContainer ref={mapRef} center={[51.9189046, 19.1343786]} zoom={13}>
+        <MapContainer ref={mapRef} center={[50.039683, 19.994544]} zoom={12}>
             <TileLayer
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
