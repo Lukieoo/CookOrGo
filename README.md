@@ -8,6 +8,7 @@ CookOrGo to aplikacja kulinarna, która pomaga użytkownikom znaleźć przepisy 
 - [Instalacja](#instalacja)
 - [Uruchamianie](#uruchamianie)
 - [Korzystanie z aplikacji](#korzystanie-z-aplikacji)
+- [Funkcje](#funkcje)
 - [Dokumentacja API](#dokumentacja-api)
 - [Licencja](#licencja)
 
@@ -39,11 +40,20 @@ Aplikacja zostanie uruchomiona na `http://localhost:8080`.
 4. Złoż zamówienie.
 5. Wyszukaj lub Gotuj pyszne dania!
 
+   
+## Funkcje
+ ![Home Page](images/ss1.png)
+ ![Login Page](images/ss2.png) 
+ ![Restaurant Page](images/ss5.png)
+ ![Details Page](images/ss6.png)
+ ![Summ Page](images/ss7.png)
+ ![Summ Page](images/ss8.png)
+ ![Configure Page](images/ss9.png)
 ## Dokumentacja API
 
 Aplikacja udostępnia API, którego dokumentację znajdziesz pod adresem `http://localhost:8080/swagger-ui.html`. Możesz tam przeglądać dostępne endpointy i testować je.
 
-![Eksport bazy Danych](database.png)
+![Eksport bazy Danych](images/ss0.png)
 ![Struktura bazy Danych](database_structure.png)
 ## Licencja
 
