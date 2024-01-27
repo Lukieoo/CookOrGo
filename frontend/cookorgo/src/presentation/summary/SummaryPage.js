@@ -25,7 +25,6 @@ function SummaryPage() {
                     {summaryProducts.map((product, index) => (
                         <div key={index} className="summary-product">
                             <p>{product.recipe}</p>
-                            {/* Dodaj inne informacje o produkcie, jeśli są dostępne */}
                             {product.ingredients && <p>Potrzebne składniki: {product.ingredients}</p>}
                             {product.cookingTime && <p>Czas przygotowania: {product.cookingTime} minut</p>}
 

@@ -118,10 +118,10 @@ function Restaurants() {
                         </div>))}
                     </div>
                     <Link to="/summaryAndMap" className="summary-link">
-                    <button className="go-summary-button">
-                        Przejdź do podsumowania
-                    </button>
-                </Link>
+                        <button className="go-summary-button">
+                            Przejdź do podsumowania
+                        </button>
+                    </Link>
                     <button className="clear-summary-button" onClick={handleClearSummary}>
                         <FontAwesomeIcon icon={faTrash}/>
                     </button>

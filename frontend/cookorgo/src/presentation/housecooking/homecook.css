@@ -55,7 +55,7 @@
     font-size: 20px;
     text-decoration: none;
     cursor: pointer;
-    margin-right: 10px; /* Odstęp od prawej strony */
+    margin-right: 10px;
 }
 
 .categories-section {
@@ -74,6 +74,7 @@
     align-content: center;
     cursor: pointer;
     color: #78C4A4;
+
     &:hover {
         background-color: #5B8C6E;
         color: white;
@@ -105,9 +106,11 @@
     elevation: 60deg;
     box-shadow: 5px 5px 5px whitesmoke;
 }
+
 .product-container:hover {
     transform: scale(1.15);
 }
+
 .product-image {
     margin: 0px 10px;
 }
@@ -125,12 +128,14 @@
     display: table;
     flex-direction: column;
 }
+
 @media screen and (max-width: 600px) {
     .product-details {
         width: 100px;
         display: revert;
     }
 }
+
 .product-name {
     font-size: 16px;
     font-weight: bold;
@@ -169,7 +174,7 @@
 .summary-products {
     margin-top: 12px;
     max-height: 250px;
-    overflow-x: auto; /* Dodaje pasek przewijania poziomego w przypadku przekroczenia szerokości */
+    overflow-x: auto;
 }
 
 .summary-product {

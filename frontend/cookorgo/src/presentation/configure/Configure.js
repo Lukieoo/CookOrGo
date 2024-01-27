@@ -308,7 +308,6 @@ const ConfigureSite = () => {
         </div>
 
         {isAddProfileFormVisible && (<form onSubmit={handleAddProfileSubmit} className="add-profile-form">
-            {/* Formularz do dodawania nowego profilu */}
             <label className="config-label">Nazwa Profilu:</label>
             <input
                 type="text"

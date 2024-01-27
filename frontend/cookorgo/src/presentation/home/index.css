@@ -1,6 +1,7 @@
-*{
-    box-sizing:border-box;
+* {
+    box-sizing: border-box;
 }
+
 body {
     margin: 0;
     width: 100%;
@@ -80,7 +81,7 @@ code {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex: 1; /* Zajmij dostępne miejsce na wysokość */
+    flex: 1;
     padding: 20px;
 }
 
@@ -101,7 +102,7 @@ code {
     font-size: 40px;
     font-style: normal;
     font-weight: 600;
-    line-height: 56px; /* 140% */
+    line-height: 56px;
     max-width: 350px;
     text-align: left;
     color: #FAF7F5;
@@ -182,7 +183,6 @@ code {
     margin-bottom: 10px;
 }
 
-/* Dodane style dla przycisku zmiany widoku w modale */
 .modal p button {
     background-color: unset;
     color: white;
@@ -194,10 +194,10 @@ code {
     margin-left: 5px;
 }
 
-/* Dodane style dla przycisku rejestracji w modalu */
 .modal p button:hover {
     color: lightgray;
 }
+
 @media screen and (max-width: 600px) {
 
     .header-container {

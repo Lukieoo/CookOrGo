@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    flex: 1; /* Zajmij dostępne miejsce na wysokość */
+    flex: 1;
     padding: 20px;
 }
 
@@ -12,10 +12,12 @@
         display: flex;
         background-color: white;
     }
+
     .product-page-container {
         flex-wrap: wrap;
     }
-    .product-details{
+
+    .product-details {
         flex: 1;
         display: block;
     }
@@ -24,9 +26,11 @@
         padding: initial;
     }
 }
-.product-price{
+
+.product-price {
     font-weight: bold;
 }
+
 .product-page-container {
     display: flex;
     justify-content: center;
@@ -62,7 +66,6 @@
     gap: 10px;
 }
 
-/* Dodatkowe style dla reszty informacji */
 .cooking-time {
     font-weight: bold;
 }
